@@ -1,16 +1,16 @@
 function Item({ name, price }) {
-  const clickMe = (message) => {
-    console.log(message);
-  };
+  const clickMe = (productName) => {
+    alert(productName)
+  }
 
   return (
     <div>
       <h4>{name}</h4>
       <h5>{price.toLocaleString()} VND</h5>
-      <button onClick={() => clickMe("ahihi")}>Buy</button>
+      <button onClick={() => clickMe(name)}>Buy</button>
       <hr />
     </div>
-  );
+  )
 }
 
-export default Item;
+export default Item

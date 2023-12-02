@@ -1,10 +1,5 @@
-function Footer({ name, address, clickAhihi, isClose }) {
-  return (
-    <div>
-      Footer
-      <button onClick={() => clickAhihi()}>Click Ahihi</button>
-    </div>
-  );
+function Footer() {
+  return <div>Footer</div>
 }
 
-export default Footer;
+export default Footer
