@@ -6,6 +6,10 @@ import Item from './Item'
 function Main(props) {
   const [count, setCount] = useState(0)
   const [text, setText] = useState('')
+  const [productName, setProductName] = useState('')
+  const [productPrice, setProductPrice] = useState('')
+  const [nameError, setNameError] = useState('')
+  const [priceError, setPriceError] = useState('')
 
   const [products, setProducts] = useState([
     {
@@ -21,16 +25,40 @@ function Main(props) {
       price: 24000000,
     },
   ])
+  console.log('🚀 ~ file: Main.jsx:28 ~ Main ~ products:', products)
 
   const handleAddProduct = () => {
-    const newProducts = [
-      ...products,
-      {
-        name: 'Samsung Galaxy S23',
-        price: 20000000,
-      },
-    ]
-    setProducts(newProducts)
+    let isValid = true
+
+    if (!productName) {
+      setNameError('Name bắt buộc!')
+      isValid = false
+    } else if (productName.length < 3) {
+      setNameError('Name phải lớn hơn 3 kí tự!')
+      isValid = false
+    } else {
+      setNameError('')
+    }
+
+    if (!productPrice) {
+      setPriceError('Price bắt buộc!')
+      isValid = false
+    } else {
+      setPriceError('')
+    }
+
+    if (isValid) {
+      const newProducts = [
+        ...products,
+        {
+          name: productName,
+          price: parseInt(productPrice),
+        },
+      ]
+      setProducts(newProducts)
+      setProductName('')
+      setProductPrice('')
+    }
   }
 
   const renderProductItems = products.map((item, index) => {
@@ -53,8 +81,19 @@ function Main(props) {
       <Filter />
       {renderProductItems}
       <div>
-        <input placeholder="Name" />
-        <input placeholder="Price" />
+        <input
+          onChange={(e) => setProductName(e.target.value)}
+          value={productName}
+          placeholder="Name"
+        />
+        <span>{nameError}</span>
+        <input
+          type="number"
+          onChange={(e) => setProductPrice(e.target.value)}
+          value={productPrice}
+          placeholder="Price"
+        />
+        <span>{priceError}</span>
         <div>
           <button onClick={() => handleAddProduct()}>Add</button>
         </div>
