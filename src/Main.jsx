@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from 'antd'
+import { Button, Input } from 'antd'
 
 import Filter from './Filter'
 import Item from './Item'
@@ -90,7 +90,7 @@ function Main(props) {
       </div>
       <div>Input value: {text}</div>
       <div>
-        <input onChange={(e) => setText(e.target.value)} value={text} />
+        <Input onChange={(e) => setText(e.target.value)} value={text} />
       </div>
       <button onClick={() => setText('Tuan')}>Set text is Tuan</button>
       <Filter />
