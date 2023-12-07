@@ -5,8 +5,8 @@ function Header(props) {
   const trungBinhResult = trungbinh([6, 5, 8])
 
   return (
-    <div>
-      <div>Header</div>
+    <div className="footer-container">
+      <div className="red">Header</div>
       {props.children}
     </div>
   )

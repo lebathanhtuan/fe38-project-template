@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Button } from 'antd'
 
 import Filter from './Filter'
 import Item from './Item'
@@ -61,8 +62,22 @@ function Main(props) {
     }
   }
 
+  const handleDeleteProduct = (index) => {
+    const newProduct = [...products]
+    newProduct.splice(index, 1)
+    setProducts(newProduct)
+  }
+
   const renderProductItems = products.map((item, index) => {
-    return <Item key={index} name={item.name} price={item.price} />
+    return (
+      <Item
+        key={index}
+        index={index}
+        name={item.name}
+        price={item.price}
+        handleDeleteProduct={handleDeleteProduct}
+      />
+    )
   })
 
   return (
@@ -95,7 +110,9 @@ function Main(props) {
         />
         <span>{priceError}</span>
         <div>
-          <button onClick={() => handleAddProduct()}>Add</button>
+          <Button type="primary" onClick={() => handleAddProduct()}>
+            Add
+          </Button>
         </div>
       </div>
     </>

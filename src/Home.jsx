@@ -1,12 +1,11 @@
-import Header from "./Header";
-import Main from "./Main";
-import Footer from "./Footer";
-import "./App.css";
+import Header from './Header'
+import Main from './Main'
+import Footer from './Footer'
 
 // PascalCase
 function Home() {
   function clickAhihi() {
-    console.log("ahihi");
+    console.log('ahihi')
   }
   return (
     <div className="wrapper">
@@ -20,15 +19,9 @@ function Home() {
         name: "Tuấn",
         address: "iViettech",
       })} */}
-      <Footer
-        name="Tuấn"
-        address="iViettech"
-        classId={38}
-        isClose={true}
-        clickAhihi={clickAhihi}
-      />
+      <Footer />
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

@@ -40,3 +40,11 @@
 .wrapper > h2 {
   color: red;
 }
+
+.wrapper > h2:hover {
+  color: green;
+}
+
+.red {
+  color: red;
+}
