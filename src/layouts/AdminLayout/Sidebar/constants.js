@@ -1,18 +1,12 @@
+import { ROUTES } from 'constants/routes'
+
 export const SIDEBAR_ITEMS = [
   {
-    name: 'Home',
-    path: '/',
+    name: 'Dashboard',
+    path: ROUTES.ADMIN.DASHBOARD,
   },
   {
-    name: 'About',
-    path: '/about',
-  },
-  {
-    name: 'A',
-    path: '/a',
-  },
-  {
-    name: 'B',
-    path: '/b',
+    name: 'Product management',
+    path: ROUTES.ADMIN.PRODUCT_MANAGE,
   },
 ]

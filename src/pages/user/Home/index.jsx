@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Button, Row, Col, Card } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, generatePath } from 'react-router-dom'
+
+import { ROUTES } from 'constants/routes'
 
 function HomePage() {
   const [productName, setProductName] = useState('')
@@ -29,6 +31,7 @@ function HomePage() {
       price: 24000000,
     },
   ])
+  console.log('generatePath', generatePath('/products/:id', { id: 1 }))
 
   const handleAddProduct = () => {
     let isValid = true
@@ -67,7 +70,7 @@ function HomePage() {
   const renderProductItems = products.map((item, index) => {
     return (
       <Col lg={6} md={8} sm={12} key={index}>
-        <Link to={`/product/${item.id}`}>
+        <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
           <Card size="small" title={item.name}>
             {item.price.toLocaleString()} VND
           </Card>
@@ -77,8 +80,13 @@ function HomePage() {
   })
 
   return (
-    <div className="wrapper">
-      <Link to="/about">Go to About</Link>
+    <div style={{ width: '100%' }}>
+      <div>
+        <Link to={ROUTES.USER.ABOUT}>Go to About</Link>
+      </div>
+      <div>
+        <Link to={ROUTES.USER.TO_DO_LIST}>Go to Todolist</Link>
+      </div>
       <Row gutter={[16, 16]}>{renderProductItems}</Row>
       <div>
         <input

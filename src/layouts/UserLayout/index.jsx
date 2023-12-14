@@ -1,14 +1,19 @@
 import { Outlet } from 'react-router-dom'
 
+import Header from './Header'
+import Footer from './Footer'
+
+import * as S from './styles'
+
 function UserLayout() {
   return (
-    <div>
-      <div>Header</div>
-      <hr />
-      <Outlet />
-      <hr />
-      <div>Footer</div>
-    </div>
+    <S.UserLayoutWrapper>
+      <Header />
+      <S.UserLayoutContainer>
+        <Outlet />
+      </S.UserLayoutContainer>
+      <Footer />
+    </S.UserLayoutWrapper>
   )
 }
 

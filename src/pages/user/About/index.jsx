@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, notification } from 'antd'
 
+import { ROUTES } from 'constants/routes'
+
 function AboutPage() {
   const navigate = useNavigate()
 
@@ -8,7 +10,7 @@ function AboutPage() {
 
   const handleGoToCart = () => {
     if (isUserLoggedIn) {
-      navigate('/cart')
+      navigate(ROUTES.USER.CART)
     } else {
       notification.warning({ message: 'Please login to continue' })
     }
@@ -17,7 +19,7 @@ function AboutPage() {
   return (
     <div>
       <h2>About Page</h2>
-      <Link to="/">Go to Home</Link>
+      <Link to={ROUTES.USER.HOME}>Go to Home</Link>
       <Button onClick={() => handleGoToCart()}>Go to cart</Button>
       <Button onClick={() => navigate('/')}>Click to Home</Button>
       <Button onClick={() => navigate(-1)}>Back</Button>
