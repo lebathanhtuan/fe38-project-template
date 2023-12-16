@@ -1,33 +1,37 @@
 import { useState } from 'react'
-import { Button, Input, Form, Card } from 'antd'
+import { Button, Input, Form, Card, Space } from 'antd'
 import { Link, generatePath } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
+import TaskItem from './TaskItem'
 import { ROUTES } from 'constants/routes'
 
 function ToDoListPage() {
   const [taskList, setTaskList] = useState([
     {
+      id: 1,
       title: 'Làm việc nhà',
       content: 'Lau nhà, quét nhà, nấu cơm',
     },
     {
+      id: 2,
       title: 'Đi chợ',
       content: 'Mua thịt, rau, cá',
     },
   ])
 
   const handleAddTask = (values) => {
-    console.log('🚀 ~ file: index.jsx:22 ~ handleAddTask ~ handleAddTask:', values)
     // Add task vào state
+    const newTask = {
+      id: uuidv4(),
+      title: values.title,
+      content: values.content,
+    }
+    setTaskList([newTask, ...taskList])
   }
 
   const renderTaskList = taskList.map((item, index) => {
-    return (
-      <Card key={index} size="small" title={item.title} style={{ marginTop: 16 }}>
-        <div>{item.content}</div>
-        <Button danger>Delete</Button>
-      </Card>
-    )
+    return <TaskItem key={item.id} item={item} />
   })
 
   return (
