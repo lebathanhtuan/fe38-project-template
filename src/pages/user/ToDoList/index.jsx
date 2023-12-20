@@ -1,37 +1,50 @@
 import { useState } from 'react'
-import { Button, Input, Form, Card, Space } from 'antd'
-import { Link, generatePath } from 'react-router-dom'
+import { Button, Input, Form, Card } from 'antd'
 import { v4 as uuidv4 } from 'uuid'
 
 import TaskItem from './TaskItem'
-import { ROUTES } from 'constants/routes'
 
 function ToDoListPage() {
-  const [taskList, setTaskList] = useState([
-    {
-      id: 1,
-      title: 'Làm việc nhà',
-      content: 'Lau nhà, quét nhà, nấu cơm',
-    },
-    {
-      id: 2,
-      title: 'Đi chợ',
-      content: 'Mua thịt, rau, cá',
-    },
-  ])
+  const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('taskList')) || [])
 
   const handleAddTask = (values) => {
-    // Add task vào state
     const newTask = {
       id: uuidv4(),
       title: values.title,
       content: values.content,
     }
-    setTaskList([newTask, ...taskList])
+    const newTaskList = [newTask, ...taskList]
+    setTaskList(newTaskList)
+    localStorage.setItem('taskList', JSON.stringify(newTaskList))
+  }
+
+  const handleUpdateTask = (id, values) => {
+    const newTaskList = [...taskList]
+    const index = newTaskList.findIndex((item) => item.id === id)
+    newTaskList.splice(index, 1, {
+      id: taskList[index].id,
+      title: values.title,
+      content: values.content,
+    })
+    setTaskList(newTaskList)
+    localStorage.setItem('taskList', JSON.stringify(newTaskList))
+  }
+
+  const handleDeleteTask = (id) => {
+    const newTaskList = taskList.filter((item) => item.id !== id)
+    setTaskList(newTaskList)
+    localStorage.setItem('taskList', JSON.stringify(newTaskList))
   }
 
   const renderTaskList = taskList.map((item, index) => {
-    return <TaskItem key={item.id} item={item} />
+    return (
+      <TaskItem
+        key={item.id}
+        item={item}
+        handleUpdateTask={handleUpdateTask}
+        handleDeleteTask={handleDeleteTask}
+      />
+    )
   })
 
   return (
@@ -76,6 +89,7 @@ function ToDoListPage() {
           </Button>
         </Form>
       </Card>
+      <Input placeholder="Search..." style={{ marginTop: 16 }} />
       <div>{renderTaskList}</div>
     </div>
   )

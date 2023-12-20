@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const SidebarWrapper = styled.div`
   position: absolute;
-  left: ${(props) => (props.isShowLeftSidebar ? '0px' : '-250px')};
+  left: ${(props) => (props.isShowAdminSidebar ? '0px' : '-250px')};
   width: 250px;
   height: 100%;
   background-color: #87e8de;

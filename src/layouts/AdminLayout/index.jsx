@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import { Outlet, Navigate, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import Header from './Header'
 import Sidebar from './Sidebar'
@@ -7,8 +7,11 @@ import Sidebar from './Sidebar'
 import * as S from './styles'
 
 function AdminLayout() {
-  const [isShowLeftSidebar, setIsShowLeftSidebar] = useState(false)
-  const [isShowRightSidebar, setIsShowRightSidebar] = useState(false)
+  const { isShowAdminSidebar } = useSelector((state) => state.common)
+  console.log(
+    '🚀 ~ file: index.jsx:15 ~ AdminLayout ~ isShowAdminSidebar:',
+    isShowAdminSidebar
+  )
 
   // const role = 'user'
 
@@ -17,22 +20,13 @@ function AdminLayout() {
   // }
   return (
     <S.AppWrapper>
-      <Header
-        isShowLeftSidebar={isShowLeftSidebar}
-        isShowRightSidebar={isShowRightSidebar}
-        setIsShowLeftSidebar={setIsShowLeftSidebar}
-        setIsShowRightSidebar={setIsShowRightSidebar}
-      />
+      <Header />
       <S.AppContainer>
-        <Sidebar isShowLeftSidebar={isShowLeftSidebar} />
-        <S.AppContent isShowLeftSidebar={isShowLeftSidebar}>
+        <Sidebar />
+        <S.AppContent isShowAdminSidebar={isShowAdminSidebar}>
           <Outlet />
         </S.AppContent>
       </S.AppContainer>
-      <S.RightSidebarWrapper isShowRightSidebar={isShowRightSidebar}>
-        <S.RightSidebarOverlay onClick={() => setIsShowRightSidebar(false)} />
-        <S.RightSidebarContainer>Right sidebar</S.RightSidebarContainer>
-      </S.RightSidebarWrapper>
     </S.AppWrapper>
   )
 }

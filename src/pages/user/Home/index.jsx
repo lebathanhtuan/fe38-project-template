@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Button, Row, Col, Card } from 'antd'
 import { Link, generatePath } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
+import { createProduct } from '../../../redux/slicers/product.slice'
 import { ROUTES } from 'constants/routes'
 
 function HomePage() {
@@ -9,29 +11,10 @@ function HomePage() {
   const [productPrice, setProductPrice] = useState('')
   const [nameError, setNameError] = useState('')
   const [priceError, setPriceError] = useState('')
-  const [products, setProducts] = useState([
-    {
-      id: 1,
-      name: 'iPhone 15',
-      price: 22000000,
-    },
-    {
-      id: 2,
-      name: 'iPhone 15 Pro',
-      price: 28000000,
-    },
-    {
-      id: 3,
-      name: 'iPhone 14 Pro',
-      price: 24000000,
-    },
-    {
-      id: 4,
-      name: 'Samsung S23 Ultra',
-      price: 24000000,
-    },
-  ])
-  console.log('generatePath', generatePath('/products/:id', { id: 1 }))
+
+  const { productList } = useSelector((state) => state.product)
+
+  const dispatch = useDispatch()
 
   const handleAddProduct = () => {
     let isValid = true
@@ -54,20 +37,18 @@ function HomePage() {
     }
 
     if (isValid) {
-      const newProducts = [
-        ...products,
-        {
+      dispatch(
+        createProduct({
           name: productName,
           price: parseInt(productPrice),
-        },
-      ]
-      setProducts(newProducts)
+        })
+      )
       setProductName('')
       setProductPrice('')
     }
   }
 
-  const renderProductItems = products.map((item, index) => {
+  const renderProductItems = productList.map((item, index) => {
     return (
       <Col lg={6} md={8} sm={12} key={index}>
         <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>

@@ -1,11 +1,14 @@
 import { useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { SIDEBAR_ITEMS } from './constants'
 
 import * as S from './styles'
 
-function Sidebar({ isShowLeftSidebar }) {
+function Sidebar() {
   const { pathname } = useLocation()
+
+  const { isShowAdminSidebar } = useSelector((state) => state.common)
 
   const renderSidebarItems = SIDEBAR_ITEMS.map((item, index) => {
     return (
@@ -16,7 +19,9 @@ function Sidebar({ isShowLeftSidebar }) {
   })
 
   return (
-    <S.SidebarWrapper isShowLeftSidebar={isShowLeftSidebar}>{renderSidebarItems}</S.SidebarWrapper>
+    <S.SidebarWrapper isShowAdminSidebar={isShowAdminSidebar}>
+      {renderSidebarItems}
+    </S.SidebarWrapper>
   )
 }
 
