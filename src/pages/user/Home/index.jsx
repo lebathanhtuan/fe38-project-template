@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button, Row, Col, Card } from 'antd'
 import { Link, generatePath } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -15,6 +15,10 @@ function HomePage() {
   const { productList } = useSelector((state) => state.product)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log('Khởi tạo HomePage')
+  }, [])
 
   const handleAddProduct = () => {
     let isValid = true

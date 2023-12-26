@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ConfigProvider } from 'antd'
 
@@ -18,6 +19,7 @@ import NotFoundPage from 'pages/NotFound'
 import { ROUTES } from 'constants/routes'
 
 function App() {
+  const [text, setText] = useState('')
   return (
     <ConfigProvider
       theme={{
@@ -32,7 +34,10 @@ function App() {
           <Route path={ROUTES.USER.HOME} element={<HomePage />} />
           <Route path={ROUTES.USER.PRODUCT_DETAIL} element={<ProductDetailPage />} />
           <Route path={ROUTES.USER.ABOUT} element={<AboutPage />} />
-          <Route path={ROUTES.USER.TO_DO_LIST} element={<ToDoListPage />} />
+          <Route
+            path={ROUTES.USER.TO_DO_LIST}
+            element={<ToDoListPage text={text} setText={setText} />}
+          />
         </Route>
         <Route element={<AdminLayout />}>
           <Route path={ROUTES.ADMIN.DASHBOARD} element={<DashboardPage />} />

@@ -1,6 +1,7 @@
 import { Button, Space } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
+import { toggleAdminSidebar } from '../../../redux/slicers/common.slice'
 import * as S from './styles'
 
 function Header() {
@@ -12,14 +13,7 @@ function Header() {
     <S.HeaderWrapper>
       <S.HeaderContainer>
         <Space size={24}>
-          <Button
-            onClick={() =>
-              dispatch({
-                type: 'common/toggleAdminSidebar',
-                payload: !isShowAdminSidebar,
-              })
-            }
-          >
+          <Button onClick={() => dispatch(toggleAdminSidebar(!isShowAdminSidebar))}>
             Menu left
           </Button>
           <div>Logo</div>

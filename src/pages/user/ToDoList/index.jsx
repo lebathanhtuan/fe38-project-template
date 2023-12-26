@@ -1,42 +1,56 @@
-import { useState } from 'react'
-import { Button, Input, Form, Card } from 'antd'
-import { v4 as uuidv4 } from 'uuid'
+import { useState, useEffect } from 'react'
+import { Button, Input, Form, Card, notification } from 'antd'
+import { useSelector, useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
+import { addTask, updateTask, deleteTask } from '../../../redux/slicers/task.slice'
+import { ROUTES } from 'constants/routes'
 import TaskItem from './TaskItem'
 
-function ToDoListPage() {
-  const [taskList, setTaskList] = useState(JSON.parse(localStorage.getItem('taskList')) || [])
+function ToDoListPage({ text, setText }) {
+  const [searchKey, setSearchKey] = useState('')
+
+  const { taskList } = useSelector((state) => state.task)
+
+  const filterTaskList = taskList.filter((item) =>
+    item.title.toLowerCase().includes(searchKey.toLowerCase())
+  )
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    notification.info({ message: 'Hello' })
+    console.log('Khơi tạo ToDoListPage')
+    // Gọi API
+    // dispatch action để lấy dữ liệu từ API
+
+    return () => {
+      console.log('Rời khỏi ToDoListPage')
+      // Clear dữ liệu khi rời khỏi trang
+      setText('Clear')
+    }
+  }, [])
+
+  console.log('🚀 ~ render')
 
   const handleAddTask = (values) => {
-    const newTask = {
-      id: uuidv4(),
-      title: values.title,
-      content: values.content,
-    }
-    const newTaskList = [newTask, ...taskList]
-    setTaskList(newTaskList)
-    localStorage.setItem('taskList', JSON.stringify(newTaskList))
+    dispatch(addTask({ data: values }))
   }
 
   const handleUpdateTask = (id, values) => {
-    const newTaskList = [...taskList]
-    const index = newTaskList.findIndex((item) => item.id === id)
-    newTaskList.splice(index, 1, {
-      id: taskList[index].id,
-      title: values.title,
-      content: values.content,
-    })
-    setTaskList(newTaskList)
-    localStorage.setItem('taskList', JSON.stringify(newTaskList))
+    dispatch(
+      updateTask({
+        id: id,
+        data: values,
+      })
+    )
   }
 
   const handleDeleteTask = (id) => {
-    const newTaskList = taskList.filter((item) => item.id !== id)
-    setTaskList(newTaskList)
-    localStorage.setItem('taskList', JSON.stringify(newTaskList))
+    dispatch(deleteTask({ id: id }))
   }
 
-  const renderTaskList = taskList.map((item, index) => {
+  const renderTaskList = filterTaskList.map((item, index) => {
     return (
       <TaskItem
         key={item.id}
@@ -50,6 +64,12 @@ function ToDoListPage() {
   return (
     <div style={{ width: '100%', margin: '0 auto', maxWidth: 700 }}>
       <h2>To Do List</h2>
+      <Input
+        onChange={(e) => setText(e.target.value)}
+        value={text}
+        placeholder="Ví dụ về Effect rời khỏi"
+      />
+      <Link to={ROUTES.USER.HOME}>Go Home</Link>
       <Card size="small" title="Add Task">
         <Form name="addTask" layout="vertical" onFinish={(values) => handleAddTask(values)}>
           <Form.Item
@@ -89,7 +109,11 @@ function ToDoListPage() {
           </Button>
         </Form>
       </Card>
-      <Input placeholder="Search..." style={{ marginTop: 16 }} />
+      <Input
+        onChange={(e) => setSearchKey(e.target.value)}
+        placeholder="Search..."
+        style={{ marginTop: 16 }}
+      />
       <div>{renderTaskList}</div>
     </div>
   )
