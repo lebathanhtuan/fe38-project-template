@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Button, Input, Form, Card, notification } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -12,8 +12,9 @@ function ToDoListPage({ text, setText }) {
 
   const { taskList } = useSelector((state) => state.task)
 
-  const filterTaskList = taskList.filter((item) =>
-    item.title.toLowerCase().includes(searchKey.toLowerCase())
+  const filterTaskList = useMemo(
+    () => taskList.filter((item) => item.title.toLowerCase().includes(searchKey.toLowerCase())),
+    [taskList, searchKey]
   )
 
   const dispatch = useDispatch()

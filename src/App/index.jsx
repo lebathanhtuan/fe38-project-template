@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, createContext } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { ConfigProvider } from 'antd'
 
@@ -18,35 +18,39 @@ import NotFoundPage from 'pages/NotFound'
 
 import { ROUTES } from 'constants/routes'
 
+export const AppContext = createContext(null)
+
 function App() {
-  const [text, setText] = useState('')
+  const [text, setText] = useState('ahihi')
   return (
-    <ConfigProvider
-      theme={{
-        token: {
-          colorPrimary: '#00b6b9',
-          borderRadius: 0,
-        },
-      }}
-    >
-      <Routes>
-        <Route element={<UserLayout />}>
-          <Route path={ROUTES.USER.HOME} element={<HomePage />} />
-          <Route path={ROUTES.USER.PRODUCT_DETAIL} element={<ProductDetailPage />} />
-          <Route path={ROUTES.USER.ABOUT} element={<AboutPage />} />
-          <Route
-            path={ROUTES.USER.TO_DO_LIST}
-            element={<ToDoListPage text={text} setText={setText} />}
-          />
-        </Route>
-        <Route element={<AdminLayout />}>
-          <Route path={ROUTES.ADMIN.DASHBOARD} element={<DashboardPage />} />
-          <Route path={ROUTES.ADMIN.PRODUCT_MANAGE} element={<ProductManagePage />} />
-          <Route path={ROUTES.ADMIN.CREATE_PRODUCT} element={<CreateProductPage />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </ConfigProvider>
+    <AppContext.Provider value={{ text: text }}>
+      <ConfigProvider
+        theme={{
+          token: {
+            colorPrimary: '#00b6b9',
+            borderRadius: 0,
+          },
+        }}
+      >
+        <Routes>
+          <Route element={<UserLayout />}>
+            <Route path={ROUTES.USER.HOME} element={<HomePage />} />
+            <Route path={ROUTES.USER.PRODUCT_DETAIL} element={<ProductDetailPage />} />
+            <Route path={ROUTES.USER.ABOUT} element={<AboutPage />} />
+            <Route
+              path={ROUTES.USER.TO_DO_LIST}
+              element={<ToDoListPage text={text} setText={setText} />}
+            />
+          </Route>
+          <Route element={<AdminLayout />}>
+            <Route path={ROUTES.ADMIN.DASHBOARD} element={<DashboardPage />} />
+            <Route path={ROUTES.ADMIN.PRODUCT_MANAGE} element={<ProductManagePage />} />
+            <Route path={ROUTES.ADMIN.CREATE_PRODUCT} element={<CreateProductPage />} />
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </ConfigProvider>
+    </AppContext.Provider>
   )
 }
 

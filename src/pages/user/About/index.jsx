@@ -1,14 +1,19 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Space, Input, notification } from 'antd'
 
 import { ROUTES } from 'constants/routes'
+
+import { AppContext } from 'App'
 
 function AboutPage() {
   const [pin1, setPin1] = useState('')
   const [pin2, setPin2] = useState('')
   const [pin3, setPin3] = useState('')
   const [pin4, setPin4] = useState('')
+  const inputRef = useRef(null)
+  const data = useContext(AppContext)
+  console.log('🚀 ~ file: index.jsx:16 ~ AboutPage ~ data:', data)
 
   const navigate = useNavigate()
 
@@ -33,6 +38,11 @@ function AboutPage() {
     }
   }
 
+  const handleFocusInput = () => {
+    inputRef.current.focus()
+    console.log(inputRef.current.input.offsetHeight)
+  }
+
   return (
     <div>
       <h2>About Page</h2>
@@ -47,6 +57,10 @@ function AboutPage() {
         <Input value={pin3} onChange={(e) => setPin3(e.target.value)} />
         <Input value={pin4} onChange={(e) => setPin4(e.target.value)} />
       </Space>
+      <div>
+        <Input ref={inputRef} />
+        <Button onClick={() => handleFocusInput()}>Focus input</Button>
+      </div>
     </div>
   )
 }

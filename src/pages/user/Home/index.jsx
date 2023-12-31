@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { Button, Row, Col, Card } from 'antd'
 import { Link, generatePath } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
@@ -52,17 +52,19 @@ function HomePage() {
     }
   }
 
-  const renderProductItems = productList.map((item, index) => {
-    return (
-      <Col lg={6} md={8} sm={12} key={index}>
-        <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
-          <Card size="small" title={item.name}>
-            {item.price.toLocaleString()} VND
-          </Card>
-        </Link>
-      </Col>
-    )
-  })
+  const renderProductItems = useMemo(() => {
+    return productList.map((item, index) => {
+      return (
+        <Col lg={6} md={8} sm={12} key={index}>
+          <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
+            <Card size="small" title={item.name}>
+              {item.price.toLocaleString()} VND
+            </Card>
+          </Link>
+        </Col>
+      )
+    })
+  }, [productList])
 
   return (
     <div style={{ width: '100%' }}>
