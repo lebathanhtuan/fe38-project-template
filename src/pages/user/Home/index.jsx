@@ -53,7 +53,7 @@ function HomePage() {
   }
 
   const renderProductItems = useMemo(() => {
-    return productList.map((item, index) => {
+    return productList.data.map((item, index) => {
       return (
         <Col lg={6} md={8} sm={12} key={index}>
           <Link to={generatePath(ROUTES.USER.PRODUCT_DETAIL, { id: item.id })}>
@@ -64,7 +64,7 @@ function HomePage() {
         </Col>
       )
     })
-  }, [productList])
+  }, [productList.data])
 
   return (
     <div style={{ width: '100%' }}>

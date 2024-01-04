@@ -2,41 +2,59 @@ import { createSlice } from '@reduxjs/toolkit'
 import { v4 as uuidv4 } from 'uuid'
 
 const initialState = {
-  productList: [
-    {
-      id: 1,
-      name: 'iPhone 15',
-      price: 22000000,
-    },
-    {
-      id: 2,
-      name: 'iPhone 15 Pro',
-      price: 28000000,
-    },
-    {
-      id: 3,
-      name: 'iPhone 14 Pro',
-      price: 24000000,
-    },
-    {
-      id: 4,
-      name: 'Samsung S23 Ultra',
-      price: 24000000,
-    },
-  ],
-  productDetail: {},
+  productList: {
+    data: [],
+    meta: {},
+    loading: false,
+    error: null,
+  },
+  productDetail: {
+    data: {},
+    loading: false,
+    error: null,
+  },
+  createProductData: {
+    loading: false,
+    error: null,
+  },
 }
 
 export const productSlice = createSlice({
   name: 'product',
   initialState: initialState,
   reducers: {
-    getProductList: () => {
-      // do something
+    // getProductList
+    getProductListRequest: (state) => {
+      state.productList.loading = true
+      state.productList.error = null
     },
-    getProductDetail: () => {
-      // do something
+    getProductListSuccess: (state, action) => {
+      const { data } = action.payload
+      state.productList.data = data
+      state.productList.loading = false
     },
+    getProductListFail: (state, action) => {
+      const { error } = action.payload
+      state.productList.error = error
+      state.productList.loading = false
+    },
+
+    // getProductDetail
+    getProductDetailRequest: (state) => {
+      state.productDetail.loading = true
+      state.productDetail.error = null
+    },
+    getProductDetailSuccess: (state, action) => {
+      const { data } = action.payload
+      state.productDetail.data = data
+      state.productDetail.loading = false
+    },
+    getProductDetailFail: (state, action) => {
+      const { error } = action.payload
+      state.productDetail.error = error
+      state.productDetail.loading = false
+    },
+
     createProduct: (state, action) => {
       state.productList.push({
         id: uuidv4(),
@@ -53,8 +71,12 @@ export const productSlice = createSlice({
 })
 
 export const {
-  getProductList,
-  getProductDetail,
+  getProductListRequest,
+  getProductListSuccess,
+  getProductListFail,
+  getProductDetailRequest,
+  getProductDetailSuccess,
+  getProductDetailFail,
   createProduct,
   updateProduct,
   deleteProduct,

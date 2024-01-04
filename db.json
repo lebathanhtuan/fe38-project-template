@@ -14,12 +14,6 @@
       "categoryId": 2
     },
     {
-      "id": 3,
-      "name": "Xiaomi Mi 13",
-      "price": 15000000,
-      "categoryId": 3
-    },
-    {
       "id": 4,
       "name": "iPhone 14",
       "price": 15000000,
@@ -57,5 +51,6 @@
       "id": 2,
       "name": "Xiaomi"
     }
-  ]
+  ],
+  "tasks": []
 }
