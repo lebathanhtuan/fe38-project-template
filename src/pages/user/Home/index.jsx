@@ -1,10 +1,12 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Button, Row, Col, Card } from 'antd'
 import { Link, generatePath } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { createProduct } from '../../../redux/slicers/product.slice'
 import { ROUTES } from 'constants/routes'
+
+import * as S from './styles'
 
 function HomePage() {
   const [productName, setProductName] = useState('')
@@ -67,7 +69,7 @@ function HomePage() {
   }, [productList.data])
 
   return (
-    <div style={{ width: '100%' }}>
+    <S.HomeWrapper>
       <div>
         <Link to={ROUTES.USER.ABOUT}>Go to About</Link>
       </div>
@@ -95,7 +97,7 @@ function HomePage() {
           </Button>
         </div>
       </div>
-    </div>
+    </S.HomeWrapper>
   )
 }
 
