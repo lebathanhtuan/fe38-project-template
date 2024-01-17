@@ -1,58 +1,38 @@
 import { useState, useEffect, useMemo } from 'react'
-import { Button, Row, Col, Card } from 'antd'
+import { Row, Col, Card, Checkbox } from 'antd'
 import { Link, generatePath } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { createProduct } from '../../../redux/slicers/product.slice'
+import { getProductListRequest } from '../../../redux/slicers/product.slice'
+import { getCategoryListRequest } from '../../../redux/slicers/category.slice'
 import { ROUTES } from 'constants/routes'
 
 import * as S from './styles'
 
 function HomePage() {
-  const [productName, setProductName] = useState('')
-  const [productPrice, setProductPrice] = useState('')
-  const [nameError, setNameError] = useState('')
-  const [priceError, setPriceError] = useState('')
-
   const { productList } = useSelector((state) => state.product)
+  const { categoryList } = useSelector((state) => state.category)
 
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log('Khởi tạo HomePage')
+    dispatch(getProductListRequest())
+    dispatch(getCategoryListRequest())
   }, [])
 
-  const handleAddProduct = () => {
-    let isValid = true
-
-    if (!productName) {
-      setNameError('Name bắt buộc!')
-      isValid = false
-    } else if (productName.length < 3) {
-      setNameError('Name phải lớn hơn 3 kí tự!')
-      isValid = false
-    } else {
-      setNameError('')
-    }
-
-    if (!productPrice) {
-      setPriceError('Price bắt buộc!')
-      isValid = false
-    } else {
-      setPriceError('')
-    }
-
-    if (isValid) {
-      dispatch(
-        createProduct({
-          name: productName,
-          price: parseInt(productPrice),
-        })
-      )
-      setProductName('')
-      setProductPrice('')
-    }
+  const handleChangeCategory = (values) => {
+    dispatch(getProductListRequest({ categoryId: values }))
   }
+
+  const renderCategoryItems = useMemo(() => {
+    return categoryList.data.map((item, index) => {
+      return (
+        <Checkbox key={item.id} value={item.id}>
+          {item.name}
+        </Checkbox>
+      )
+    })
+  }, [categoryList.data])
 
   const renderProductItems = useMemo(() => {
     return productList.data.map((item, index) => {
@@ -70,33 +50,18 @@ function HomePage() {
 
   return (
     <S.HomeWrapper>
-      <div>
-        <Link to={ROUTES.USER.ABOUT}>Go to About</Link>
-      </div>
-      <div>
-        <Link to={ROUTES.USER.TO_DO_LIST}>Go to Todolist</Link>
-      </div>
-      <Row gutter={[16, 16]}>{renderProductItems}</Row>
-      <div>
-        <input
-          onChange={(e) => setProductName(e.target.value)}
-          value={productName}
-          placeholder="Name"
-        />
-        <span>{nameError}</span>
-        <input
-          type="number"
-          onChange={(e) => setProductPrice(e.target.value)}
-          value={productPrice}
-          placeholder="Price"
-        />
-        <span>{priceError}</span>
-        <div>
-          <Button type="primary" onClick={() => handleAddProduct()}>
-            Add
-          </Button>
-        </div>
-      </div>
+      <Row gutter={[16, 16]}>
+        <Col span={8}>
+          <Card title="Bộ lọc" size="small">
+            <Checkbox.Group onChange={(values) => handleChangeCategory(values)}>
+              {renderCategoryItems}
+            </Checkbox.Group>
+          </Card>
+        </Col>
+        <Col span={16}>
+          <Row gutter={[16, 16]}>{renderProductItems}</Row>
+        </Col>
+      </Row>
     </S.HomeWrapper>
   )
 }

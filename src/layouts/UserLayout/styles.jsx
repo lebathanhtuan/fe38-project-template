@@ -8,7 +8,6 @@ export const UserLayoutWrapper = styled.div`
 
 export const UserLayoutContainer = styled.div`
   position: relative;
-  display: flex;
   flex: 1;
   padding: 24px;
 `

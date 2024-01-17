@@ -10,9 +10,14 @@ import {
   getProductDetailFail,
 } from '../slicers/product.slice'
 
-function* getProductListSaga() {
+function* getProductListSaga(action) {
   try {
-    const result = yield axios.get('http://localhost:4000/products')
+    const { categoryId } = action.payload
+    const result = yield axios.get('http://localhost:4000/products', {
+      params: {
+        categoryId: categoryId,
+      },
+    })
     yield put(getProductListSuccess({ data: result.data }))
   } catch (e) {
     yield put(getProductListFail({ error: 'Lỗi...' }))
