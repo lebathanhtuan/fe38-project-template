@@ -29,8 +29,9 @@ export const productSlice = createSlice({
       state.productList.error = null
     },
     getProductListSuccess: (state, action) => {
-      const { data } = action.payload
-      state.productList.data = data
+      const { data, meta, more } = action.payload
+      state.productList.data = more ? [...state.productList.data, ...data] : data
+      state.productList.meta = meta
       state.productList.loading = false
     },
     getProductListFail: (state, action) => {
