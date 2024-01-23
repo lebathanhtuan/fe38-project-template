@@ -9,7 +9,9 @@ function Header() {
   return (
     <S.HeaderWrapper>
       <S.HeaderContainer>
-        <div>Logo</div>
+        <Link to={ROUTES.USER.HOME}>
+          <div>Logo</div>
+        </Link>
         <Dropdown
           menu={{
             items: [

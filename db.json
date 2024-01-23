@@ -1,5 +1,20 @@
 {
-  "users": [],
+  "users": [
+    {
+      "id": 1,
+      "fullname": "Tuan Admin",
+      "email": "tuan-admin@gmail.com",
+      "password": "123321",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "fullname": "Tuan",
+      "email": "tuan@gmail.com",
+      "password": "123321",
+      "role": "user"
+    }
+  ],
   "products": [
     {
       "id": 1,
@@ -107,5 +122,111 @@
       "name": "Smartphone"
     }
   ],
-  "tasks": []
+  "reviews": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 1,
+      "content": "Sản phẩm rất tốt",
+      "rating": 5,
+      "createdAt": 112312412431
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 1,
+      "status": "Shipping",
+      "totalPrice": 45000000
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "status": "Shipping",
+      "totalPrice": 20000000
+    }
+  ],
+  "orderDetails": [
+    {
+      "id": 1,
+      "orderId": 1,
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "orderId": 1,
+      "productId": 2,
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "orderId": 2,
+      "productId": 2,
+      "quantity": 1
+    }
+  ],
+  "carts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 1,
+      "quantity": 1
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "productId": 2,
+      "quantity": 1
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "productId": 2,
+      "quantity": 1
+    }
+  ],
+  "favorites": [
+    {
+      "id": 1,
+      "userId": 1,
+      "productId": 1
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "productId": 2
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "productId": 2
+    }
+  ],
+  "addresses": [
+    {
+      "id": 1,
+      "userId": 1,
+      "fullname": "Tuan Admin",
+      "phone": "0123456789",
+      "address": "Ha Noi"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "fullname": "Tuan Admin",
+      "phone": "0123456789",
+      "address": "Da Nang"
+    },
+    {
+      "id": 3,
+      "userId": 2,
+      "fullname": "Tuan",
+      "phone": "0123456789",
+      "address": "Ha Noi"
+    }
+  ],
+  "cities": [],
+  "districts": [],
+  "wards": []
 }

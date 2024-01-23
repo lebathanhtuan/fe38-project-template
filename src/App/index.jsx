@@ -7,6 +7,7 @@ import UserLayout from 'layouts/UserLayout'
 
 import HomePage from 'pages/user/Home'
 import AboutPage from 'pages/user/About'
+import ProductListPage from 'pages/user/ProductList'
 import ProductDetailPage from 'pages/user/ProductDetail'
 import ToDoListPage from 'pages/user/ToDoList'
 
@@ -35,6 +36,7 @@ function App() {
         <Routes>
           <Route element={<UserLayout />}>
             <Route path={ROUTES.USER.HOME} element={<HomePage />} />
+            <Route path={ROUTES.USER.PRODUCT_LIST} element={<ProductListPage />} />
             <Route path={ROUTES.USER.PRODUCT_DETAIL} element={<ProductDetailPage />} />
             <Route path={ROUTES.USER.ABOUT} element={<AboutPage />} />
             <Route
