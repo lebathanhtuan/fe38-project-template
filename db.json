@@ -1,18 +1,26 @@
 {
   "users": [
     {
-      "id": 1,
-      "fullname": "Tuan Admin",
-      "email": "tuan-admin@gmail.com",
-      "password": "123321",
-      "role": "admin"
+      "email": "tuan@gmail.com",
+      "password": "$2a$10$IYP6P5VL1RupYVH1xbAqW.ajACbGMo0mDlefNpWaPTu0EY1/B6Rb6",
+      "fullName": "Tuan",
+      "role": "user",
+      "birthday": null,
+      "createdAt": 1706615471927,
+      "updatedAt": 1706615471927,
+      "isDelete": false,
+      "id": 1
     },
     {
-      "id": 2,
-      "fullname": "Tuan",
-      "email": "tuan@gmail.com",
-      "password": "123321",
-      "role": "user"
+      "email": "tuanadmin@gmail.com",
+      "password": "$2a$10$ddkNdZdGjvKjSkgslKTEj.3UPmqc01Ck3IMzPZMY2uF..rch1S0cG",
+      "fullName": "Tuan",
+      "role": "admin",
+      "birthday": null,
+      "createdAt": 1706617893917,
+      "updatedAt": 1706617893917,
+      "isDelete": false,
+      "id": 2
     }
   ],
   "products": [

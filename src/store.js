@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from 'redux-saga'
 
+import authReducer from './redux/slicers/auth.slice'
 import productReducer from './redux/slicers/product.slice'
 import categoryReducer from './redux/slicers/category.slice'
 import typeReducer from './redux/slicers/type.slice'
@@ -13,6 +14,7 @@ const sagaMiddleware = createSagaMiddleware()
 
 const store = configureStore({
   reducer: {
+    auth: authReducer,
     product: productReducer,
     category: categoryReducer,
     type: typeReducer,
