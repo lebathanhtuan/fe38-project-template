@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   userInfo: {
     data: {},
-    loading: false,
+    loading: true,
     error: null,
   },
   registerData: {
@@ -43,6 +43,7 @@ export const authSlice = createSlice({
       const { data } = action.payload
       state.loginData.loading = false
       state.userInfo.data = data
+      state.userInfo.loading = false
     },
     loginFail: (state, action) => {
       const { error } = action.payload

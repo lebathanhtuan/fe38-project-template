@@ -4,20 +4,21 @@ import { useSelector } from 'react-redux'
 import Header from './Header'
 import Sidebar from './Sidebar'
 
+import { ROUTES } from 'constants/routes'
+
 import * as S from './styles'
 
 function AdminLayout() {
   const { isShowAdminSidebar } = useSelector((state) => state.common)
-  console.log(
-    '🚀 ~ file: index.jsx:15 ~ AdminLayout ~ isShowAdminSidebar:',
-    isShowAdminSidebar
-  )
+  const { userInfo } = useSelector((state) => state.auth)
 
-  // const role = 'user'
+  const accessToken = localStorage.getItem('accessToken')
 
-  // if (role !== 'amdin') {
-  //   return <Navigate to="/asdiashfihaishfoia" />
-  // }
+  if (accessToken && userInfo.loading) {
+    return <div>Loading...</div>
+  } else if (userInfo.data.role !== 'admin') {
+    return <Navigate to={ROUTES.USER.HOME} />
+  }
   return (
     <S.AppWrapper>
       <Header />

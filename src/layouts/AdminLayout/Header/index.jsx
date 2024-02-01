@@ -1,11 +1,13 @@
-import { Button, Space } from 'antd'
+import { Button, Space, Dropdown } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { toggleAdminSidebar } from '../../../redux/slicers/common.slice'
+import { logoutRequest } from '../../../redux/slicers/auth.slice'
 import * as S from './styles'
 
 function Header() {
   const { isShowAdminSidebar } = useSelector((state) => state.common)
+  const { userInfo } = useSelector((state) => state.auth)
 
   const dispatch = useDispatch()
 
@@ -18,7 +20,23 @@ function Header() {
           </Button>
           <div>Logo</div>
         </Space>
-        <div>Avatar</div>
+        <Dropdown
+          menu={{
+            items: [
+              {
+                key: '1',
+                label: 'My profile',
+              },
+              {
+                key: '2',
+                label: 'Logout',
+                onClick: () => dispatch(logoutRequest()),
+              },
+            ],
+          }}
+        >
+          <div>{userInfo.data.fullName}</div>
+        </Dropdown>
       </S.HeaderContainer>
     </S.HeaderWrapper>
   )

@@ -27,6 +27,7 @@ function* getProductListSaga(action) {
         _page: page,
         _limit: limit,
         _expand: 'category',
+        isDelete: false,
       },
     })
     yield put(
