@@ -13,6 +13,7 @@ import ProductListPage from 'pages/user/ProductList'
 import ProductDetailPage from 'pages/user/ProductDetail'
 import ToDoListPage from 'pages/user/ToDoList'
 import CartPage from 'pages/user/Cart'
+import CheckoutPage from 'pages/user/Checkout'
 
 import DashboardPage from 'pages/admin/Dashboard'
 import ProductManagePage from 'pages/admin/ProductManage'
@@ -53,6 +54,7 @@ function App() {
           <Route path={ROUTES.USER.ABOUT} element={<AboutPage />} />
           <Route path={ROUTES.USER.TO_DO_LIST} element={<ToDoListPage />} />
           <Route path={ROUTES.USER.CART} element={<CartPage />} />
+          <Route path={ROUTES.USER.CHECKOUT} element={<CheckoutPage />} />
         </Route>
         <Route element={<AdminLayout />}>
           <Route path={ROUTES.ADMIN.DASHBOARD} element={<DashboardPage />} />

@@ -7,6 +7,8 @@ import categoryReducer from './redux/slicers/category.slice'
 import typeReducer from './redux/slicers/type.slice'
 import taskReducer from './redux/slicers/task.slice'
 import cartReducer from './redux/slicers/cart.slice'
+import locationReducer from './redux/slicers/location.slice'
+import orderReducer from './redux/slicers/order.slice'
 import commonReducer from './redux/slicers/common.slice'
 
 import rootSaga from './redux/sagas'
@@ -21,6 +23,8 @@ const store = configureStore({
     type: typeReducer,
     task: taskReducer,
     cart: cartReducer,
+    location: locationReducer,
+    order: orderReducer,
     common: commonReducer,
   },
   middleware: (getDefaultMiddleware) => [
