@@ -1,6 +1,7 @@
 import { Dropdown, Space, Button, Badge } from 'antd'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { LogoutOutlined, UserOutlined, ShoppingCartOutlined } from '@ant-design/icons'
 
 import { ROUTES } from 'constants/routes'
 import { logoutRequest } from '../../../redux/slicers/auth.slice'
@@ -11,6 +12,7 @@ function Header() {
   const { userInfo } = useSelector((state) => state.auth)
   const { cartList } = useSelector((state) => state.cart)
 
+  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   return (
@@ -19,41 +21,46 @@ function Header() {
         <Link to={ROUTES.USER.HOME}>
           <div>Logo</div>
         </Link>
-
-        {userInfo.data.id ? (
-          <Space>
+        <Space size={24}>
+          <Badge count={cartList.length}>
             <Link to={ROUTES.USER.CART}>
-              <Badge count={cartList.length}>
-                <Button size="small" type="text">
-                  Giỏ hàng
-                </Button>
-              </Badge>
+              <ShoppingCartOutlined style={{ fontSize: 24, color: '#414141' }} />
             </Link>
+          </Badge>
+          {userInfo.data.id ? (
             <Dropdown
               menu={{
                 items: [
                   {
                     key: '1',
-                    label: <Link to={ROUTES.ADMIN.DASHBOARD}>Dashboard</Link>,
+                    label: 'Dashboard',
+                    icon: <UserOutlined />,
+                    onClick: () => navigate(ROUTES.ADMIN.DASHBOARD),
+                    style: {
+                      display: userInfo.data.role === 'admin' ? 'block' : 'none',
+                    },
                   },
                   {
                     key: '2',
-                    label: 'My profile',
+                    label: 'Thông tin cá nhân',
+                    icon: <UserOutlined />,
+                    onClick: () => navigate(ROUTES.USER.PROFILE),
                   },
                   {
                     key: '3',
-                    label: 'Logout',
+                    label: 'Đăng xuất',
                     onClick: () => dispatch(logoutRequest()),
+                    icon: <LogoutOutlined />,
                   },
                 ],
               }}
             >
-              <div>{userInfo.data.fullName}</div>
+              <h2>{userInfo.data.fullName}</h2>
             </Dropdown>
-          </Space>
-        ) : (
-          <Link to={ROUTES.LOGIN}>Login</Link>
-        )}
+          ) : (
+            <Button onClick={() => navigate(ROUTES.LOGIN)}>Đăng nhập</Button>
+          )}
+        </Space>
       </S.HeaderContainer>
     </S.HeaderWrapper>
   )
