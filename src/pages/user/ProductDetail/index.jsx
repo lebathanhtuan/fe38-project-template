@@ -43,6 +43,11 @@ const ProductDetailPage = () => {
     return productDetail.data.favorites?.some((item) => item.userId === userInfo.data.id)
   }, [productDetail.data, userInfo.data.id])
 
+  const productRate = useMemo(() => {
+    const totalRate = reviewList.data.reduce((total, item) => total + item.rate, 0)
+    return reviewList.data.length ? totalRate / reviewList.data.length : 0
+  }, [reviewList.data]) 
+
   useEffect(() => {
     dispatch(getProductDetailRequest({ id: parseInt(id) }))
     dispatch(getReviewListRequest({ productId: parseInt(id) }))
@@ -170,6 +175,10 @@ const ProductDetailPage = () => {
           <Col md={14} sm={24}>
             <p size="sm">{productDetail.data.category?.name}</p>
             <h1>{productDetail.data.name}</h1>
+            <Space>
+            <Rate value={productRate} allowHalf disabled />
+            <span>{`(${productRate ? `${productRate} sao` : 'Chưa có đánh giá'})`}</span>
+            </Space>
             <h3 style={{ color: '#006363' }}>{productDetail.data.price?.toLocaleString()} ₫</h3>
             <div style={{ margin: '8px 0' }}>
               <InputNumber value={quantity} min={1} onChange={(value) => setQuantity(value)} />

@@ -5,6 +5,7 @@ import { Form, Button, Input, Select, Radio, Row, Col, Card, Space, Table, Bread
 import { HomeOutlined } from '@ant-design/icons'
 
 import { ROUTES } from 'constants/routes'
+import { GUEST_ID } from 'constants/guest'
 import {
   getCityListRequest,
   getDistrictListRequest,
@@ -68,7 +69,7 @@ function CheckoutPage() {
       orderProductRequest({
         data: {
           ...values,
-          userId: userInfo.data.id,
+          userId: userInfo.data.id || GUEST_ID,
           status: 'pending',
           totalPrice: totalPrice,
           cityName: cityData.name,

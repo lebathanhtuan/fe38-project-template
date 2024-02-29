@@ -5,7 +5,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { CameraOutlined, UserOutlined, HomeOutlined } from '@ant-design/icons'
 
 import { ROUTES } from 'constants/routes'
+import { convertImageToBase64 } from 'utils/file'
 import { PROFILE_MENU } from './constants'
+
+import { changeAvatarRequest } from '../../redux/slicers/auth.slice'
 
 import * as S from './styles'
 
@@ -17,7 +20,22 @@ function Profile() {
 
   const accessToken = localStorage.getItem('accessToken')
 
-  const handleChangeAvatar = async (e) => {}
+  const handleChangeAvatar = async (e) => {
+    const file = e.target.files[0]
+    if (!file) return
+    if (!['image/jpeg', 'image/jpg', 'image/png'].includes(file.type)) {
+      return notification.error({ message: 'File không đúng định dạng' })
+    }
+    const imgBase64 = await convertImageToBase64(file)
+    await dispatch(
+      changeAvatarRequest({
+        id: userInfo.data.id,
+        data: {
+          avatar: imgBase64,
+        },
+      })
+    )
+  }
 
   const renderProfileMenu = useMemo(() => {
     return PROFILE_MENU.map((item, index) => {
@@ -73,7 +91,7 @@ function Profile() {
                     accept=".png, .jpg, .jpeg"
                     onChange={(e) => handleChangeAvatar(e)}
                   />
-                  <label for="imageUpload">
+                  <label htmlFor="imageUpload">
                     <CameraOutlined style={{ fontSize: 16 }} />
                   </label>
                 </S.AvatarEdit>

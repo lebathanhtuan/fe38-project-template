@@ -3,11 +3,17 @@ import { Table } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
 
+import { getOrderListRequest } from '../../../redux/slicers/order.slice'
+
 const OrderHistories = () => {
   const dispatch = useDispatch()
 
   const { userInfo } = useSelector((state) => state.auth)
   const { orderList } = useSelector((state) => state.order)
+
+  useEffect(() => {
+    dispatch(getOrderListRequest({ userId: userInfo.data.id }))
+  }, [])
 
   const tableColumns = [
     {
@@ -53,7 +59,7 @@ const OrderHistories = () => {
           <ul>
             {record.orderDetails.map((item) => (
               <li key={item.id}>
-                {item.name}
+                {item.productName}
                 {` - ${item.price}`}
                 {` - ${item.quantity}`}
                 {` - ${item.price * item.quantity}`}

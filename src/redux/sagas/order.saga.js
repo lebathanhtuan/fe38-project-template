@@ -11,9 +11,15 @@ import {
 } from '../slicers/order.slice'
 import { clearCartRequest } from '../slicers/cart.slice'
 
-function* getOrderListSaga() {
+function* getOrderListSaga(action) {
   try {
-    const result = yield axios.get('http://localhost:4000/orders')
+    const { userId } = action.payload
+    const result = yield axios.get('http://localhost:4000/orders', {
+      params: {
+        userId: userId,
+        _embed: 'orderDetails',
+      },
+    })
     yield put(getOrderListSuccess({ data: result.data }))
   } catch (e) {
     yield put(getOrderListFail({ error: 'Lỗi...' }))

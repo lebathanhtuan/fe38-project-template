@@ -1,24 +1,25 @@
 import { IdcardOutlined, ShoppingOutlined, HeartOutlined, LockOutlined } from '@ant-design/icons'
+import { ROUTES } from 'constants/routes'
 
 export const PROFILE_MENU = [
   {
     label: 'Thông tin cá nhân',
-    path: '/profile/user-info',
+    path: ROUTES.USER.USER_INFO,
     icon: <IdcardOutlined />,
   },
   {
     label: 'Lịch sử mua hàng',
-    path: '/profile/order-history',
+    path: ROUTES.USER.ORDER_HISTORY,
     icon: <ShoppingOutlined />,
   },
   {
     label: 'Sản phẩm yêu thích',
-    path: '/profile/favorite-products',
+    path: ROUTES.USER.FAVORITE_PRODUCTS,
     icon: <HeartOutlined />,
   },
   {
     label: 'Đổi mật khẩu',
-    path: '/profile/change-password',
+    path: ROUTES.USER.CHANGE_PASSWORD,
     icon: <LockOutlined />,
   },
 ]

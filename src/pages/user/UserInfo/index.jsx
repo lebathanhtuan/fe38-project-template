@@ -3,29 +3,35 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Button, Form, Input, DatePicker } from 'antd'
 import dayjs from 'dayjs'
 
+import { updateUserInfoRequest } from '../../../redux/slicers/auth.slice'
+
 function UserInfo() {
   const [updateUserInfoForm] = Form.useForm()
 
   const { userInfo, updateUserInfoData } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
 
-  // const initialValues = {
-  //   fullName: userInfo.data.fullName,
-  //   email: userInfo.data.email,
-  //   phoneNumber: userInfo.data.phoneNumber,
-  //   birthday: dayjs(userInfo.data.birthday),
-  // }
+  useEffect(() => {
+    if (userInfo.data.id) {
+      updateUserInfoForm.setFieldsValue({
+        fullName: userInfo.data.fullName,
+        email: userInfo.data.email,
+        phoneNumber: userInfo.data.phoneNumber,
+        birthday: userInfo.data.birthday ? dayjs(userInfo.data.birthday) : undefined,
+      })
+    }
+  }, [userInfo.data])
 
   const handleUpdateUserInfo = (values) => {
-    // dispatch(
-    //   updateUserInfoRequest({
-    //     id: userInfo.data.id,
-    //     data: {
-    //       ...values,
-    //       birthday: dayjs(values.birthday).valueOf(),
-    //     },
-    //   })
-    // )
+    dispatch(
+      updateUserInfoRequest({
+        id: userInfo.data.id,
+        data: {
+          ...values,
+          birthday: dayjs(values.birthday).valueOf(),
+        },
+      })
+    )
   }
 
   return (
