@@ -1,5 +1,6 @@
 import { debounce, takeEvery, put } from 'redux-saga/effects'
 import axios from 'axios'
+import { notification } from 'antd'
 
 import {
   getProductListRequest,
@@ -80,7 +81,8 @@ function* createProductSaga(action) {
         productId: result.data.id,
       })
     }
-    yield callback()
+    if (callback) yield callback()
+    notification.success({ message: 'Thêm sản phẩm thành công' })
     yield put(createProductSuccess({ data: result.data }))
   } catch (e) {
     yield put(createProductFail({ error: 'Lỗi...' }))
@@ -105,7 +107,8 @@ function* updateProductSaga(action) {
         yield axios.delete(`http://localhost:4000/images/${initialImageIds[j]}`)
       }
     }
-    yield callback()
+    if (callback) yield callback()
+    notification.success({ message: 'Cập nhật sản phẩm thành công' })
     yield put(updateProductSuccess({ data: result.data }))
   } catch (e) {
     yield put(updateProductFail({ error: 'Lỗi...' }))
@@ -114,10 +117,12 @@ function* updateProductSaga(action) {
 
 function* deleteProductSaga(action) {
   try {
-    const { id } = action.payload
+    const { id, callback } = action.payload
     const result = yield axios.patch(`http://localhost:4000/products/${id}`, {
       isDelete: true,
     })
+    if (callback) yield callback()
+    notification.success({ message: 'Xóa sản phẩm thành công' })
     yield put(deleteProductSuccess({ data: result.data }))
   } catch (e) {
     yield put(deleteProductFail({ error: 'Lỗi...' }))

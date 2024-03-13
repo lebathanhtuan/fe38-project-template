@@ -46,89 +46,140 @@
       "name": "iPhone 15",
       "price": 25000000,
       "categoryId": 1,
-      "typeId": 2,
       "content": "<p class=\"ql-align-center\"><strong>ABC</strong></p>",
-      "updatedAt": 1710304527650
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 2,
       "name": "Samsung Galaxy S23",
       "price": 20000000,
       "categoryId": 2,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 4,
       "name": "iPhone 14",
       "price": 15000000,
       "categoryId": 1,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 5,
       "name": "iPhone 14 Pro",
       "price": 18000000,
       "categoryId": 1,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 6,
       "name": "iPhone 15 Pro",
       "price": 30000000,
       "categoryId": 1,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 7,
       "name": "iPhone 13",
       "price": 12000000,
       "categoryId": 1,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 8,
       "name": "Samsung Galaxy S24",
       "price": 25000000,
       "categoryId": 2,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 9,
       "name": "Samsung Galaxy S24 Ultra",
       "price": 35000000,
       "categoryId": 2,
-      "typeId": 2,
-      "content": "<h3 class=\"ql-align-justify\"> <a href=\"https://www.thegioididong.com/dtdd/samsung-galaxy-s24-ultra-5g\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\">Samsung Galaxy S24 Ultra</a>&nbsp;mẫu điện thoại cao cấp được ra mắt vào đầu năm 2024, sản phẩm tiếp tục kế thừa và cải tiến từ thế hệ trước. Điểm đặc biệt là sử dụng chip Snapdragon 8 Gen 3 for Galaxy, camera 200 MP và tích hợp nhiều tính năng AI.</h3><h3class=\"ql-align-justify\">Thiết kế sang trọng và có sử dụng Titanium</h3> <p class=\"ql-align-justify\">Thiết kế của Galaxy S24 Ultra có thể xem là một điểm nâng cấp nổi bật trong dòng điện thoại flagship của Samsung ở năm 2024. Bên cạnh đó, sự thay đổi này cũng tạo nên một số ý kiến trái chiều cho rằng hãng đang lười làm mới sản phẩm của mình khi đem nguyên kiểu thiết kế cũ sang và thay đổi ở phần chất liệu.</p><p class=\"ql-align-justify\"> <br></p><p class=\"ql-align-justify\"> <a href=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-1-1020x570.jpg\" target=\"_blank\" style=\"font-size: 18px; color: rgb(47, 128, 237);\"> <img src=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-1-1020x570.jpg\" height=\"570\" width=\"1020\"> </a> </p><p class=\"ql-align-justify\"> <span style=\"font-size: 18px;\">Tuy nhiên, sau khi cầm nắm và trải nghiệm thực tế, mình thấy hãng thay đổi khá nhiều chứ không hẳn sao chép y hệt Galaxy S23 Ultra, chỉ là hãng đang cố giữ lại những gì vốn đã tốt và khắc phục một vài nhược điểm để điện thoại được hoàn thiện nhất mà thôi.</span> </p><p class=\"ql-align-justify\"> <span style=\"font-size: 18px;\">Ấn tượng đầu tiên khi được cầm Galaxy S24 Ultra trên tay là máy rất sang, hãng đã không làm bo cong màn hình hay mặt lưng như các phiên bản trước đó nữa, mà thay vào đó là cách tạo hình phẳng phiu ở mặt lưng và màn hình giúp tạo nên tính đồng bộ. Có thể nói, 2024 là năm mà Samsung làm mẫu điện thoại Ultra được phẳng nhất trong vài năm trở lại đây.</span> </p><p class=\"ql-align-justify\"> <br></p><p class=\"ql-align-justify\"> <a href=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-2-1020x570.jpg\" target=\"_blank\" style=\"font-size: 18px; color: rgb(47, 128, 237);\"> <img src=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-2-1020x570.jpg\" height=\"570\" width=\"1020\"> </a> </p><p class=\"ql-align-justify\"> <span style=\"font-size: 18px;\">Không chỉ mặt lưng, bốn góc của điện thoại cũng được làm 90 độ như&nbsp;</span> <a href=\"https://www.thegioididong.com/dtdd/samsung-galaxy-s23-ultra\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\">Samsung Galaxy S23&nbsp;Ultra</a>. Phải công nhận kiểu thiết kế này đẹp, sang và ấn tượng. Tuy nhiên, kích thước của Galaxy S24 Ultra cũng khá lớn nên các góc vuông này vô tình tạo nên một vài điểm hạn chế như: Gây cấn khi bỏ vào túi quần trước, hay cầm ngang điện thoại khi chơi game,...</p><p class=\"ql-align-justify\">Ở phần khung viền, năm nay Samsung làm nó lớn hơn so với thế hệ tiền nhiệm, nó có phần bo cong nhẹ ở vị trí giao nhau với mặt lưng và màn hình nên khi cầm cực kỳ đã tay. Kể cả khi cầm chặt, mình dường như không cảm thấy bị cấn một tí nào cả.</p><ul> <li> <br></li></ul>"
+      "content": "<h3 class=\"ql-align-justify\"> <a href=\"https://www.thegioididong.com/dtdd/samsung-galaxy-s24-ultra-5g\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\">Samsung Galaxy S24 Ultra</a>&nbsp;mẫu điện thoại cao cấp được ra mắt vào đầu năm 2024, sản phẩm tiếp tục kế thừa và cải tiến từ thế hệ trước. Điểm đặc biệt là sử dụng chip Snapdragon 8 Gen 3 for Galaxy, camera 200 MP và tích hợp nhiều tính năng AI.</h3><h3class=\"ql-align-justify\">Thiết kế sang trọng và có sử dụng Titanium</h3> <p class=\"ql-align-justify\">Thiết kế của Galaxy S24 Ultra có thể xem là một điểm nâng cấp nổi bật trong dòng điện thoại flagship của Samsung ở năm 2024. Bên cạnh đó, sự thay đổi này cũng tạo nên một số ý kiến trái chiều cho rằng hãng đang lười làm mới sản phẩm của mình khi đem nguyên kiểu thiết kế cũ sang và thay đổi ở phần chất liệu.</p><p class=\"ql-align-justify\"> <br></p><p class=\"ql-align-justify\"> <a href=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-1-1020x570.jpg\" target=\"_blank\" style=\"font-size: 18px; color: rgb(47, 128, 237);\"> <img src=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-1-1020x570.jpg\" height=\"570\" width=\"1020\"> </a> </p><p class=\"ql-align-justify\"> <span style=\"font-size: 18px;\">Tuy nhiên, sau khi cầm nắm và trải nghiệm thực tế, mình thấy hãng thay đổi khá nhiều chứ không hẳn sao chép y hệt Galaxy S23 Ultra, chỉ là hãng đang cố giữ lại những gì vốn đã tốt và khắc phục một vài nhược điểm để điện thoại được hoàn thiện nhất mà thôi.</span> </p><p class=\"ql-align-justify\"> <span style=\"font-size: 18px;\">Ấn tượng đầu tiên khi được cầm Galaxy S24 Ultra trên tay là máy rất sang, hãng đã không làm bo cong màn hình hay mặt lưng như các phiên bản trước đó nữa, mà thay vào đó là cách tạo hình phẳng phiu ở mặt lưng và màn hình giúp tạo nên tính đồng bộ. Có thể nói, 2024 là năm mà Samsung làm mẫu điện thoại Ultra được phẳng nhất trong vài năm trở lại đây.</span> </p><p class=\"ql-align-justify\"> <br></p><p class=\"ql-align-justify\"> <a href=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-2-1020x570.jpg\" target=\"_blank\" style=\"font-size: 18px; color: rgb(47, 128, 237);\"> <img src=\"https://cdn.tgdd.vn/Products/42/307174/samsung-galaxy-s24-ultra-5g-2-1020x570.jpg\" height=\"570\" width=\"1020\"> </a> </p><p class=\"ql-align-justify\"> <span style=\"font-size: 18px;\">Không chỉ mặt lưng, bốn góc của điện thoại cũng được làm 90 độ như&nbsp;</span> <a href=\"https://www.thegioididong.com/dtdd/samsung-galaxy-s23-ultra\" target=\"_blank\" style=\"color: rgb(47, 128, 237);\">Samsung Galaxy S23&nbsp;Ultra</a>. Phải công nhận kiểu thiết kế này đẹp, sang và ấn tượng. Tuy nhiên, kích thước của Galaxy S24 Ultra cũng khá lớn nên các góc vuông này vô tình tạo nên một vài điểm hạn chế như: Gây cấn khi bỏ vào túi quần trước, hay cầm ngang điện thoại khi chơi game,...</p><p class=\"ql-align-justify\">Ở phần khung viền, năm nay Samsung làm nó lớn hơn so với thế hệ tiền nhiệm, nó có phần bo cong nhẹ ở vị trí giao nhau với mặt lưng và màn hình nên khi cầm cực kỳ đã tay. Kể cả khi cầm chặt, mình dường như không cảm thấy bị cấn một tí nào cả.</p><ul> <li> <br></li></ul>",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 10,
       "name": "Xiaomi Mi 14",
       "price": 15000000,
       "categoryId": 3,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 11,
       "name": "Xiaomi Mi 13",
       "price": 10000000,
       "categoryId": 3,
-      "typeId": 2,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
     },
     {
       "id": 12,
       "name": "Nokia cục gạch",
       "price": 100000,
       "categoryId": 4,
-      "typeId": 1,
-      "content": ""
+      "content": "",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315500939,
+      "isDelete": false
+    },
+    {
+      "name": "iPhone 13",
+      "categoryId": 1,
+      "price": 123213123,
+      "content": "<p>123123</p>",
+      "createdAt": 1710315500939,
+      "updatedAt": 1710315739299,
+      "isDelete": true,
+      "id": 13
+    },
+    {
+      "name": "iPhone 13",
+      "categoryId": 1,
+      "price": 123123123,
+      "content": "",
+      "createdAt": 1710315782732,
+      "updatedAt": 1710316019649,
+      "isDelete": true,
+      "id": 14
+    },
+    {
+      "name": "iPhone 13",
+      "categoryId": 1,
+      "price": 123123123,
+      "content": "",
+      "createdAt": 1710316046748,
+      "updatedAt": 1710316099415,
+      "isDelete": true,
+      "id": 15
     }
   ],
   "categories": [
@@ -147,16 +198,6 @@
     {
       "id": 4,
       "name": "Nokia"
-    }
-  ],
-  "types": [
-    {
-      "id": 1,
-      "name": "Cục gạch"
-    },
-    {
-      "id": 2,
-      "name": "Smartphone"
     }
   ],
   "reviews": [

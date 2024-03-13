@@ -15,14 +15,13 @@ import {
 
 function* getFavoriteListSaga(action) {
   try {
-    const { userId, callback } = action.payload
+    const { userId } = action.payload
     const result = yield axios.get('http://localhost:4000/favorites', {
       params: {
         userId: userId,
         _expand: 'product',
       },
     })
-    if (callback) callback()
     yield put(getFavoriteListSuccess({ data: result.data }))
   } catch (e) {
     yield put(getFavoriteListFailure({ error: 'Lỗi' }))
@@ -41,8 +40,9 @@ function* favoriteProductSaga(action) {
 
 function* unFavoriteProductSaga(action) {
   try {
-    const { id } = action.payload
+    const { id, callback } = action.payload
     yield axios.delete(`http://localhost:4000/favorites/${id}`)
+    if (callback) yield callback()
     yield put(unFavoriteProductSuccess({ id: id }))
   } catch (e) {
     yield put(unFavoriteProductFailure({ error: 'Lỗi' }))

@@ -48,9 +48,7 @@ function* loginSaga(action) {
     yield localStorage.setItem('accessToken', result.data.accessToken)
     yield put(loginSuccess({ data: result.data.user }))
     yield callback(result.data.user.role)
-    notification.success({
-      message: 'Đăng nhập thành công',
-    })
+    notification.success({ message: 'Đăng nhập thành công' })
   } catch (e) {
     yield put(loginFail({ error: 'Email hoặc mật khẩu không đúng' }))
   }
@@ -71,9 +69,7 @@ function* updateUserInfoSaga(action) {
     const { id, data } = action.payload
     const result = yield axios.patch(`http://localhost:4000/users/${id}`, data)
     yield put(updateUserInfoSuccess({ data: result.data }))
-    notification.success({
-      message: 'Cập nhật thành công',
-    })
+    notification.success({ message: 'Cập nhật thành công' })
   } catch (e) {
     yield put(updateUserInfoFail({ error: 'Lỗi...' }))
   }
@@ -89,7 +85,8 @@ function* changePasswordSaga(action) {
     const result = yield axios.patch(`http://localhost:4000/users/${id}`, {
       password: data.newPassword,
     })
-    callback()
+    yield callback()
+    notification.success({ message: 'Cập nhật thành công' })
     yield put(changePasswordSuccess({ data: result.data }))
   } catch (e) {
     yield put(changePasswordFailure({ error: 'Lỗi' }))
@@ -101,9 +98,7 @@ function* changeAvatarSaga(action) {
     const { id, data } = action.payload
     const result = yield axios.patch(`http://localhost:4000/users/${id}`, data)
     yield put(changeAvatarSuccess({ data: result.data }))
-    notification.success({
-      message: 'Cập nhật thành công',
-    })
+    notification.success({ message: 'Cập nhật thành công' })
   } catch (e) {
     yield put(changeAvatarFail({ error: 'Lỗi...' }))
   }
