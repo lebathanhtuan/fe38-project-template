@@ -1,4 +1,4 @@
-import { Outlet, Navigate, useNavigate } from 'react-router-dom'
+import { Outlet, Navigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import Header from './Header'
@@ -24,7 +24,7 @@ function AdminLayout() {
       <Header />
       <S.AppContainer>
         <Sidebar />
-        <S.AppContent isShowAdminSidebar={isShowAdminSidebar}>
+        <S.AppContent $isShowAdminSidebar={isShowAdminSidebar}>
           <Outlet />
         </S.AppContent>
       </S.AppContainer>

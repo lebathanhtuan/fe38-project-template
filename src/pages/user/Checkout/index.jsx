@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { Form, Button, Input, Select, Radio, Row, Col, Card, Space, Table, Breadcrumb } from 'antd'
 import { HomeOutlined } from '@ant-design/icons'
 
+import Container from 'components/Container'
 import { ROUTES } from 'constants/routes'
 import { GUEST_ID } from 'constants/guest'
 import {
@@ -12,8 +13,6 @@ import {
   getWardListRequest,
 } from '../../../redux/slicers/location.slice'
 import { orderProductRequest } from '../../../redux/slicers/order.slice'
-
-import * as S from './styles'
 
 function CheckoutPage() {
   const [checkoutForm] = Form.useForm()
@@ -107,7 +106,7 @@ function CheckoutPage() {
   }, [wardList.data])
 
   return (
-    <S.CheckoutWrapper>
+    <Container>
       <Breadcrumb
         items={[
           {
@@ -261,10 +260,12 @@ function CheckoutPage() {
               rowKey="id"
               pagination={false}
             />
+            <h4 style={{ marginTop: 16, textAlign: 'right' }}>Tổng tiền</h4>
+            <p style={{ textAlign: 'right' }}>{totalPrice.toLocaleString()} VND</p>
           </Card>
         </Col>
       </Row>
-    </S.CheckoutWrapper>
+    </Container>
   )
 }
 

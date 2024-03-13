@@ -1,25 +1,7 @@
-import { Link, generatePath } from 'react-router-dom'
-import qs from 'qs'
-
-import { ROUTES } from 'constants/routes'
-
-import * as S from './styles'
+import Container from 'components/Container'
 
 function HomePage() {
-  return (
-    <S.HomeWrapper>
-      <div>
-        <Link to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({ categoryId: [1] })}`}>
-          Danh sách sản phẩm Apple
-        </Link>
-      </div>
-      <div>
-        <Link to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({ categoryId: [2] })}`}>
-          Danh sách sản phẩm Samsung
-        </Link>
-      </div>
-    </S.HomeWrapper>
-  )
+  return <Container>Trang chủ</Container>
 }
 
 export default HomePage

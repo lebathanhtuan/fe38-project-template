@@ -4,6 +4,7 @@ import { Card, Row, Col, Breadcrumb, Space, notification } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { CameraOutlined, UserOutlined, HomeOutlined } from '@ant-design/icons'
 
+import Container from 'components/Container'
 import { ROUTES } from 'constants/routes'
 import { convertImageToBase64 } from 'utils/file'
 import { PROFILE_MENU } from './constants'
@@ -60,7 +61,7 @@ function Profile() {
     return <Navigate to={ROUTES.USER.HOME} />
   }
   return (
-    <S.ProfileWrapper>
+    <Container>
       <Breadcrumb
         items={[
           {
@@ -70,6 +71,13 @@ function Profile() {
                   <HomeOutlined />
                   <span>Trang chủ</span>
                 </Space>
+              </Link>
+            ),
+          },
+          {
+            title: (
+              <Link to={ROUTES.USER.PROFILE}>
+                <span>Trang cá nhân</span>
               </Link>
             ),
           },
@@ -115,7 +123,7 @@ function Profile() {
           </Card>
         </Col>
       </Row>
-    </S.ProfileWrapper>
+    </Container>
   )
 }
 

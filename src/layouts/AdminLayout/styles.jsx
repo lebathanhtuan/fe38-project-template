@@ -19,7 +19,7 @@ export const AppContent = styled.div`
   transition: all 0.3s;
 
   ${(props) =>
-    props.isShowAdminSidebar &&
+    props.$isShowAdminSidebar &&
     css`
       margin-left: 250px;
       width: calc(100% - 250px);

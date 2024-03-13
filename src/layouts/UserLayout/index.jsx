@@ -9,9 +9,9 @@ function UserLayout() {
   return (
     <S.UserLayoutWrapper>
       <Header />
-      <S.UserLayoutContainer>
+      <S.MainWrapper>
         <Outlet />
-      </S.UserLayoutContainer>
+      </S.MainWrapper>
       <Footer />
     </S.UserLayoutWrapper>
   )

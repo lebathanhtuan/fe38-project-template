@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { v4 as uuidv4 } from 'uuid'
 
 import { favoriteProductSuccess, unFavoriteProductSuccess } from './favorite.slice'
 
@@ -66,6 +65,13 @@ export const productSlice = createSlice({
       state.productDetail.loading = false
     },
 
+    // clearProductDetail
+    clearProductDetailRequest: (state) => {
+      state.productDetail.data = {}
+      state.productDetail.loading = false
+      state.productDetail.error = null
+    },
+
     // createProduct
     createProductRequest: (state, action) => {
       state.createProductData.loading = true
@@ -78,7 +84,7 @@ export const productSlice = createSlice({
       state.createProductData.loading = false
       state.createProductData.error = action.payload.error
     },
-    
+
     // updateProduct
     updateProductRequest: (state, action) => {
       state.updateProductData.loading = true
@@ -129,6 +135,7 @@ export const {
   getProductDetailRequest,
   getProductDetailSuccess,
   getProductDetailFail,
+  clearProductDetailRequest,
   createProductRequest,
   createProductSuccess,
   createProductFail,

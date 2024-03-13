@@ -6,6 +6,7 @@ import { PlusOutlined } from '@ant-design/icons'
 import ReactQuill from 'react-quill'
 
 import { ROUTES } from 'constants/routes'
+import { EDITOR_FORMATS, EDITOR_MODULES } from 'constants/editor'
 import { createProductRequest } from '../../../redux/slicers/product.slice'
 import { getCategoryListRequest } from '../../../redux/slicers/category.slice'
 import { convertImageToBase64 } from 'utils/file'
@@ -49,7 +50,7 @@ const CreateProductPage = () => {
       createProductRequest({
         data: productValues,
         images: newImages,
-        callback: () => navigate(ROUTES.ADMIN.PRODUCT_MANAGEMENT),
+        callback: () => navigate(ROUTES.ADMIN.PRODUCT_LIST),
       })
     )
   }
@@ -67,9 +68,9 @@ const CreateProductPage = () => {
   return (
     <S.Wrapper>
       <S.TopWrapper>
-        <h3>Create Product</h3>
+        <h3>Tạo sản phẩm</h3>
         <Button type="primary" loading={createProductData.load} onClick={() => createForm.submit()}>
-          Create
+          Tạo
         </Button>
       </S.TopWrapper>
       <Form
@@ -78,18 +79,22 @@ const CreateProductPage = () => {
         initialValues={initialValues}
         onFinish={(values) => handleCreateProduct(values)}
       >
-        <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Required!' }]}>
+        <Form.Item
+          label="Tên sản phẩm"
+          name="name"
+          rules={[{ required: true, message: 'Required!' }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Category"
+          label="Thương hiệu"
           name="categoryId"
           rules={[{ required: true, message: 'Required!' }]}
         >
           <Select>{renderProductOptions}</Select>
         </Form.Item>
         <Space>
-          <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Required!' }]}>
+          <Form.Item label="Giá" name="price" rules={[{ required: true, message: 'Required!' }]}>
             <InputNumber
               formatter={(value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
@@ -99,7 +104,7 @@ const CreateProductPage = () => {
           <span>VND</span>
         </Space>
         <Form.Item
-          label="Images"
+          label="Hình ảnh"
           name="images"
           valuePropName="fileList"
           getValueFromEvent={(e) => {
@@ -114,9 +119,11 @@ const CreateProductPage = () => {
             </div>
           </Upload>
         </Form.Item>
-        <Form.Item label="Content" name="content">
+        <Form.Item label="Nội dung" name="content">
           <ReactQuill
             theme="snow"
+            modules={EDITOR_MODULES}
+            formats={EDITOR_FORMATS}
             onChange={(value) => {
               createForm.setFieldsValue({ content: value })
             }}
