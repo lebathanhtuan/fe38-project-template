@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { Table, Button } from 'antd'
+import { Row, Table, Button, Pagination } from 'antd'
 
 import { ROUTES } from 'constants/routes'
-import { getProductListRequest } from '../../../redux/slicers/product.slice'
+import { ADMIN_TABLE_LIMIT } from 'constants/paging'
+import { getProductListRequest, deleteProductRequest } from '../../../redux/slicers/product.slice'
 
 function ProductManage() {
   const dispatch = useDispatch()
 
   const { productList } = useSelector((state) => state.product)
-  console.log('🚀 ~ file: index.jsx:11 ~ ProductManage ~ productList:', productList)
 
   const tableColumns = [
     {
@@ -52,6 +52,15 @@ function ProductManage() {
         loading={productList.loading}
         pagination={false}
       />
+      <Row justify="center">
+        <Pagination
+          current={productList.meta.page}
+          pageSize={ADMIN_TABLE_LIMIT}
+          total={productList.meta.total}
+          // onChange={(page) => handleChangePage(page)}
+          style={{ margin: '16px auto 0' }}
+        />
+      </Row>
     </div>
   )
 }

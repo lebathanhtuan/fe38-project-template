@@ -46,7 +46,7 @@ const ProductDetailPage = () => {
   const productRate = useMemo(() => {
     const totalRate = reviewList.data.reduce((total, item) => total + item.rate, 0)
     return reviewList.data.length ? totalRate / reviewList.data.length : 0
-  }, [reviewList.data]) 
+  }, [reviewList.data])
 
   useEffect(() => {
     dispatch(getProductDetailRequest({ id: parseInt(id) }))
@@ -167,6 +167,37 @@ const ProductDetailPage = () => {
 
   return (
     <S.ProductDetailWrapper>
+      <Breadcrumb
+        items={[
+          {
+            title: (
+              <Link to={ROUTES.USER.HOME}>
+                <Space>
+                  <HomeOutlined />
+                  <span>Trang chủ</span>
+                </Space>
+              </Link>
+            ),
+          },
+          {
+            title: <Link to={ROUTES.USER.PRODUCT_LIST}>Danh sách sản phẩm</Link>,
+          },
+          {
+            title: (
+              <Link
+                to={`${ROUTES.USER.PRODUCT_LIST}?${qs.stringify({
+                  categoryId: [productDetail.data.categoryId],
+                })}`}
+              >
+                {productDetail.data.category?.name}
+              </Link>
+            ),
+          },
+          {
+            title: productDetail.data.name,
+          },
+        ]}
+      />
       <Card size="small" bordered={false}>
         <Row gutter={[16, 16]}>
           <Col md={10} sm={24}>
@@ -176,8 +207,8 @@ const ProductDetailPage = () => {
             <p size="sm">{productDetail.data.category?.name}</p>
             <h1>{productDetail.data.name}</h1>
             <Space>
-            <Rate value={productRate} allowHalf disabled />
-            <span>{`(${productRate ? `${productRate} sao` : 'Chưa có đánh giá'})`}</span>
+              <Rate value={productRate} allowHalf disabled />
+              <span>{`(${productRate ? `${productRate} sao` : 'Chưa có đánh giá'})`}</span>
             </Space>
             <h3 style={{ color: '#006363' }}>{productDetail.data.price?.toLocaleString()} ₫</h3>
             <div style={{ margin: '8px 0' }}>

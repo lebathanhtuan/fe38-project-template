@@ -19,6 +19,14 @@ const initialState = {
     loading: false,
     error: null,
   },
+  updateProductData: {
+    load: false,
+    error: null,
+  },
+  deleteProductData: {
+    load: false,
+    error: null,
+  },
 }
 
 export const productSlice = createSlice({
@@ -58,17 +66,43 @@ export const productSlice = createSlice({
       state.productDetail.loading = false
     },
 
-    createProduct: (state, action) => {
-      state.productList.push({
-        id: uuidv4(),
-        ...action.payload,
-      })
+    // createProduct
+    createProductRequest: (state, action) => {
+      state.createProductData.loading = true
+      state.createProductData.error = null
     },
-    updateProduct: () => {
-      // do something
+    createProductSuccess: (state, action) => {
+      state.createProductData.loading = false
     },
-    deleteProduct: () => {
-      // do something
+    createProductFail: (state, action) => {
+      state.createProductData.loading = false
+      state.createProductData.error = action.payload.error
+    },
+    
+    // updateProduct
+    updateProductRequest: (state, action) => {
+      state.updateProductData.loading = true
+      state.createProductData.error = null
+    },
+    updateProductSuccess: (state, action) => {
+      state.updateProductData.loading = false
+    },
+    updateProductFail: (state, action) => {
+      state.updateProductData.loading = false
+      state.updateProductData.error = action.payload.error
+    },
+
+    // deleteProduct
+    deleteProductRequest: (state, action) => {
+      state.deleteProductData.loading = true
+      state.deleteProductData.error = null
+    },
+    deleteProductSuccess: (state, action) => {
+      state.deleteProductData.loading = false
+    },
+    deleteProductFail: (state, action) => {
+      state.deleteProductData.loading = false
+      state.deleteProductData.error = action.payload.error
     },
   },
   extraReducers: (builder) => {
@@ -95,9 +129,15 @@ export const {
   getProductDetailRequest,
   getProductDetailSuccess,
   getProductDetailFail,
-  createProduct,
-  updateProduct,
-  deleteProduct,
+  createProductRequest,
+  createProductSuccess,
+  createProductFail,
+  updateProductRequest,
+  updateProductSuccess,
+  updateProductFail,
+  deleteProductRequest,
+  deleteProductSuccess,
+  deleteProductFail,
 } = productSlice.actions
 
 export default productSlice.reducer

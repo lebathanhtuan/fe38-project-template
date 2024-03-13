@@ -15,6 +15,9 @@ import {
   updateUserInfoRequest,
   updateUserInfoSuccess,
   updateUserInfoFail,
+  changePasswordRequest,
+  changePasswordSuccess,
+  changePasswordFailure,
   changeAvatarRequest,
   changeAvatarSuccess,
   changeAvatarFail,
@@ -76,6 +79,23 @@ function* updateUserInfoSaga(action) {
   }
 }
 
+function* changePasswordSaga(action) {
+  try {
+    const { id, data, callback } = action.payload
+    yield axios.post('http://localhost:4000/login', {
+      email: data.email,
+      password: data.password,
+    })
+    const result = yield axios.patch(`http://localhost:4000/users/${id}`, {
+      password: data.newPassword,
+    })
+    callback()
+    yield put(changePasswordSuccess({ data: result.data }))
+  } catch (e) {
+    yield put(changePasswordFailure({ error: 'Lỗi' }))
+  }
+}
+
 function* changeAvatarSaga(action) {
   try {
     const { id, data } = action.payload
@@ -94,5 +114,6 @@ export default function* authSaga() {
   yield takeEvery(loginRequest, loginSaga)
   yield takeEvery(getUserInfoRequest, getUserInfoSaga)
   yield takeEvery(updateUserInfoRequest, updateUserInfoSaga)
+  yield takeEvery(changePasswordRequest, changePasswordSaga)
   yield takeEvery(changeAvatarRequest, changeAvatarSaga)
 }

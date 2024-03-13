@@ -1,44 +1,74 @@
 import { useEffect, useMemo } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Button, Form, Input, Select, InputNumber, Space, Upload } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import ReactQuill from 'react-quill'
 
 import { ROUTES } from 'constants/routes'
-import { createProductRequest } from '../../../redux/slicers/product.slice'
+import { getProductDetailRequest, createProductRequest } from '../../../redux/slicers/product.slice'
 import { getCategoryListRequest } from '../../../redux/slicers/category.slice'
-import { convertImageToBase64 } from 'utils/file'
+import { convertBase64ToImage, convertImageToBase64 } from 'utils/file'
 
 import * as S from './styles'
 
-const CreateProductPage = () => {
+const UpdateProductPage = () => {
+  const { id } = useParams()
+
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const [createForm] = Form.useForm()
+  const [updateForm] = Form.useForm()
 
   const { categoryList } = useSelector((state) => state.category)
-  const { createProductData } = useSelector((state) => state.product)
+  const { productDetail, updateProductData } = useSelector((state) => state.product)
 
   const initialValues = {
-    name: '',
-    price: undefined,
-    categoryId: undefined,
-    content: '',
+    name: productDetail.data.name,
+    price: productDetail.data.price,
+    categoryId: productDetail.data.category?.id,
+    content: productDetail.data.content,
     images: [],
   }
 
   useEffect(() => {
+    dispatch(getProductDetailRequest({ id: id }))
     dispatch(getCategoryListRequest())
-  }, [])
+  }, [id])
 
-  const handleCreateProduct = async (values) => {
+  useEffect(() => {
+    if (productDetail.data.id) {
+      updateForm.resetFields()
+      setImagesField(productDetail.data.images)
+    }
+  }, [productDetail.data])
+
+  const setImagesField = async (images) => {
+    const newImages = []
+
+    for (let i = 0; i < images.length; i++) {
+      const imageFile = await convertBase64ToImage(images[i].url, images[i].name, images[i].type)
+      await newImages.push({
+        id: images[i].id,
+        lastModified: imageFile.lastModified,
+        lastModifiedDate: imageFile.lastModifiedDate,
+        name: imageFile.name,
+        size: imageFile.size,
+        type: imageFile.type,
+        thumbUrl: images[i].thumbUrl,
+        originFileObj: imageFile,
+      })
+    }
+    await updateForm.setFieldValue('images', newImages)
+  }
+
+  const handleUpdateProduct = async (values) => {
     const { images, ...productValues } = values
     const newImages = []
     for (let i = 0; i < images.length; i++) {
       const imgBase64 = await convertImageToBase64(images[i].originFileObj)
       await newImages.push({
+        ...(images[i].id && { id: images[i].id }),
         name: images[i].name,
         type: images[i].type,
         thumbUrl: images[i].thumbUrl,
@@ -47,8 +77,10 @@ const CreateProductPage = () => {
     }
     dispatch(
       createProductRequest({
+        id: id,
         data: productValues,
         images: newImages,
+        initialImageIds: productDetail.data.images.map((item) => item.id),
         callback: () => navigate(ROUTES.ADMIN.PRODUCT_MANAGEMENT),
       })
     )
@@ -67,16 +99,16 @@ const CreateProductPage = () => {
   return (
     <S.Wrapper>
       <S.TopWrapper>
-        <h3>Create Product</h3>
-        <Button type="primary" loading={createProductData.load} onClick={() => createForm.submit()}>
-          Create
+        <h3>Update Product</h3>
+        <Button type="primary" loading={updateProductData.load} onClick={() => updateForm.submit()}>
+          Update
         </Button>
       </S.TopWrapper>
       <Form
-        form={createForm}
+        form={updateForm}
         layout="vertical"
         initialValues={initialValues}
-        onFinish={(values) => handleCreateProduct(values)}
+        onFinish={(values) => handleUpdateProduct(values)}
       >
         <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Required!' }]}>
           <Input />
@@ -118,7 +150,7 @@ const CreateProductPage = () => {
           <ReactQuill
             theme="snow"
             onChange={(value) => {
-              createForm.setFieldsValue({ content: value })
+              updateForm.setFieldsValue({ content: value })
             }}
           />
         </Form.Item>
@@ -127,4 +159,4 @@ const CreateProductPage = () => {
   )
 }
 
-export default CreateProductPage
+export default UpdateProductPage

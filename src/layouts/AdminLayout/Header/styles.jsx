@@ -9,7 +9,6 @@ export const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  max-width: 1000px;
   width: 100%;
   padding: 8px 16px;
 `
