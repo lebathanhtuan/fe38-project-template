@@ -69,10 +69,16 @@ function ProductList() {
               onConfirm={() =>
                 dispatch(
                   deleteProductRequest({
-                    ...filterParams,
                     id: item.id,
-                    page: 1,
-                    limit: ADMIN_TABLE_LIMIT,
+                    callback: () => {
+                      dispatch(
+                        getProductListRequest({
+                          ...filterParams,
+                          page: 1,
+                          limit: ADMIN_TABLE_LIMIT,
+                        })
+                      )
+                    },
                   })
                 )
               }

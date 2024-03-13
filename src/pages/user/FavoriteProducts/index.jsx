@@ -32,7 +32,6 @@ function FavoriteProducts() {
     dispatch(
       unFavoriteProductRequest({
         id: id,
-        userId: userInfo.data.id,
         callback: () => {
           dispatch(
             getFavoriteListRequest({

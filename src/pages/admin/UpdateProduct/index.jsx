@@ -88,7 +88,7 @@ const UpdateProductPage = () => {
         data: productValues,
         images: newImages,
         initialImageIds: productDetail.data.images.map((item) => item.id),
-        callback: () => navigate(ROUTES.ADMIN.PRODUCT_MANAGEMENT),
+        callback: () => navigate(ROUTES.ADMIN.PRODUCT_LIST),
       })
     )
   }
