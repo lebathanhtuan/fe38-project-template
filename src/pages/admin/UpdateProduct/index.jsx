@@ -6,9 +6,14 @@ import { PlusOutlined } from '@ant-design/icons'
 import ReactQuill from 'react-quill'
 
 import { ROUTES } from 'constants/routes'
-import { getProductDetailRequest, createProductRequest } from '../../../redux/slicers/product.slice'
-import { getCategoryListRequest } from '../../../redux/slicers/category.slice'
+import { EDITOR_FORMATS, EDITOR_MODULES } from 'constants/editor'
 import { convertBase64ToImage, convertImageToBase64 } from 'utils/file'
+import {
+  getProductDetailRequest,
+  clearProductDetailRequest,
+  updateProductRequest,
+} from '../../../redux/slicers/product.slice'
+import { getCategoryListRequest } from '../../../redux/slicers/category.slice'
 
 import * as S from './styles'
 
@@ -23,25 +28,27 @@ const UpdateProductPage = () => {
   const { categoryList } = useSelector((state) => state.category)
   const { productDetail, updateProductData } = useSelector((state) => state.product)
 
-  const initialValues = {
-    name: productDetail.data.name,
-    price: productDetail.data.price,
-    categoryId: productDetail.data.category?.id,
-    content: productDetail.data.content,
-    images: [],
-  }
-
   useEffect(() => {
     dispatch(getProductDetailRequest({ id: id }))
     dispatch(getCategoryListRequest())
+
+    return () => {
+      dispatch(clearProductDetailRequest())
+    }
   }, [id])
 
   useEffect(() => {
     if (productDetail.data.id) {
-      updateForm.resetFields()
+      updateForm.setFieldsValue({
+        name: productDetail.data.name,
+        price: productDetail.data.price,
+        categoryId: productDetail.data.category?.id,
+        content: productDetail.data.content,
+        images: [],
+      })
       setImagesField(productDetail.data.images)
     }
-  }, [productDetail.data])
+  }, [productDetail.data.id])
 
   const setImagesField = async (images) => {
     const newImages = []
@@ -76,7 +83,7 @@ const UpdateProductPage = () => {
       })
     }
     dispatch(
-      createProductRequest({
+      updateProductRequest({
         id: id,
         data: productValues,
         images: newImages,
@@ -99,29 +106,28 @@ const UpdateProductPage = () => {
   return (
     <S.Wrapper>
       <S.TopWrapper>
-        <h3>Update Product</h3>
+        <h3>Cập nhật sản phẩm</h3>
         <Button type="primary" loading={updateProductData.load} onClick={() => updateForm.submit()}>
-          Update
+          Cập nhật
         </Button>
       </S.TopWrapper>
-      <Form
-        form={updateForm}
-        layout="vertical"
-        initialValues={initialValues}
-        onFinish={(values) => handleUpdateProduct(values)}
-      >
-        <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Required!' }]}>
+      <Form form={updateForm} layout="vertical" onFinish={(values) => handleUpdateProduct(values)}>
+        <Form.Item
+          label="Tên sản phẩm"
+          name="name"
+          rules={[{ required: true, message: 'Required!' }]}
+        >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Category"
+          label="Thương hiệu"
           name="categoryId"
           rules={[{ required: true, message: 'Required!' }]}
         >
           <Select>{renderProductOptions}</Select>
         </Form.Item>
         <Space>
-          <Form.Item label="Price" name="price" rules={[{ required: true, message: 'Required!' }]}>
+          <Form.Item label="Giá" name="price" rules={[{ required: true, message: 'Required!' }]}>
             <InputNumber
               formatter={(value) => value.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
               parser={(value) => value.replace(/\$\s?|(,*)/g, '')}
@@ -131,7 +137,7 @@ const UpdateProductPage = () => {
           <span>VND</span>
         </Space>
         <Form.Item
-          label="Images"
+          label="Hình ảnh"
           name="images"
           valuePropName="fileList"
           getValueFromEvent={(e) => {
@@ -142,13 +148,15 @@ const UpdateProductPage = () => {
           <Upload listType="picture-card" beforeUpload={Upload.LIST_IGNORE}>
             <div>
               <PlusOutlined />
-              <div style={{ marginTop: 8 }}>Upload</div>
+              <div style={{ marginTop: 8 }}>Tải lên</div>
             </div>
           </Upload>
         </Form.Item>
-        <Form.Item label="Content" name="content">
+        <Form.Item label="Nội dung" name="content">
           <ReactQuill
             theme="snow"
+            modules={EDITOR_MODULES}
+            formats={EDITOR_FORMATS}
             onChange={(value) => {
               updateForm.setFieldsValue({ content: value })
             }}

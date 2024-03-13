@@ -1,7 +1,7 @@
-import { Button, Space, Dropdown } from 'antd'
+import { Button, Space, Dropdown, Avatar } from 'antd'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { MenuOutlined, HolderOutlined, Lo } from '@ant-design/icons'
+import { MenuOutlined, HomeOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
 
 import { ROUTES } from 'constants/routes'
 import { toggleAdminSidebar } from '../../../redux/slicers/common.slice'
@@ -18,33 +18,42 @@ function Header() {
   return (
     <S.HeaderWrapper>
       <S.HeaderContainer>
-        <Space size={24}>
+        <Space size={16}>
           <Button
+            type="text"
             onClick={() => dispatch(toggleAdminSidebar(!isShowAdminSidebar))}
-            icon={<MenuOutlined />}
+            icon={<MenuOutlined style={{ color: 'white' }} />}
           />
-          <div>Logo</div>
+          <h3>Logo</h3>
         </Space>
-        <Dropdown
-          menu={{
-            items: [
-              {
-                key: '1',
-                label: 'Trang chủ',
-                icon: <HomeOutlined />,
-                onClick: () => navigate(ROUTES.USER.HOME),
-              },
-              {
-                key: '2',
-                label: 'Đăng xuất',
-                icon: <LogoutOutlined />,
-                onClick: () => dispatch(logoutRequest()),
-              },
-            ],
-          }}
-        >
-          <div>{userInfo.data.fullName}</div>
-        </Dropdown>
+
+        <Space>
+          {userInfo.data.avatar ? (
+            <Avatar src={userInfo.data.avatar} />
+          ) : (
+            <Avatar icon={<UserOutlined />} />
+          )}
+          <Dropdown
+            menu={{
+              items: [
+                {
+                  key: '1',
+                  label: 'Trang chủ',
+                  icon: <HomeOutlined />,
+                  onClick: () => navigate(ROUTES.USER.HOME),
+                },
+                {
+                  key: '2',
+                  label: 'Đăng xuất',
+                  icon: <LogoutOutlined />,
+                  onClick: () => dispatch(logoutRequest()),
+                },
+              ],
+            }}
+          >
+            <h3>{userInfo.data.fullName}</h3>
+          </Dropdown>
+        </Space>
       </S.HeaderContainer>
     </S.HeaderWrapper>
   )

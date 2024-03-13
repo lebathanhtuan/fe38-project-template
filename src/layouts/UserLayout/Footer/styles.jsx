@@ -5,5 +5,5 @@ export const FooterWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #d3d3d3;
-  padding: 16px;
+  padding: 24px;
 `

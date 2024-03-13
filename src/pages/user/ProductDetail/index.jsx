@@ -19,7 +19,10 @@ import dayjs from 'dayjs'
 import qs from 'qs'
 
 import { ROUTES } from 'constants/routes'
-import { getProductDetailRequest } from '../../../redux/slicers/product.slice'
+import {
+  getProductDetailRequest,
+  clearProductDetailRequest,
+} from '../../../redux/slicers/product.slice'
 import { addToCartRequest } from '../../../redux/slicers/cart.slice'
 import { getReviewListRequest, reviewProductRequest } from '../../../redux/slicers/review.slice'
 import {
@@ -43,15 +46,23 @@ const ProductDetailPage = () => {
     return productDetail.data.favorites?.some((item) => item.userId === userInfo.data.id)
   }, [productDetail.data, userInfo.data.id])
 
-  const productRate = useMemo(() => {
-    const totalRate = reviewList.data.reduce((total, item) => total + item.rate, 0)
-    return reviewList.data.length ? totalRate / reviewList.data.length : 0
-  }, [reviewList.data])
+  const averageRate = useMemo(
+    () =>
+      reviewList.data.length
+        ? (
+            reviewList.data.reduce((total, item) => total + item.rate, 0) / reviewList.data.length
+          ).toFixed(1)
+        : 0,
+    [reviewList.data]
+  )
 
   useEffect(() => {
     dispatch(getProductDetailRequest({ id: parseInt(id) }))
     dispatch(getReviewListRequest({ productId: parseInt(id) }))
-  }, [])
+    return () => {
+      dispatch(clearProductDetailRequest())
+    }
+  }, [id])
 
   const handleAddToCart = () => {
     dispatch(
@@ -197,20 +208,31 @@ const ProductDetailPage = () => {
             title: productDetail.data.name,
           },
         ]}
+        style={{ marginBottom: 8 }}
       />
       <Card size="small" bordered={false}>
         <Row gutter={[16, 16]}>
           <Col md={10} sm={24}>
-            <img src="https://placehold.co/600x400" alt="" width="100%" height="auto" />
+            <img
+              src={
+                productDetail.data.images?.length
+                  ? productDetail.data.images[0].url
+                  : 'https://placehold.co/600x400'
+              }
+              alt=""
+              width="100%"
+              height="auto"
+              style={{ objectFit: 'cover' }}
+            />
           </Col>
           <Col md={14} sm={24}>
-            <p size="sm">{productDetail.data.category?.name}</p>
+            <p>{productDetail.data.category?.name}</p>
             <h1>{productDetail.data.name}</h1>
-            <Space>
-              <Rate value={productRate} allowHalf disabled />
-              <span>{`(${productRate ? `${productRate} sao` : 'Chưa có đánh giá'})`}</span>
+            <Space align="start" style={{ marginBottom: 8 }}>
+              <Rate value={averageRate} allowHalf disabled />
+              <span>{`(${averageRate ? `${averageRate} sao` : 'Chưa có đánh giá'})`}</span>
             </Space>
-            <h3 style={{ color: '#006363' }}>{productDetail.data.price?.toLocaleString()} ₫</h3>
+            <h2 style={{ color: '#006363' }}>{productDetail.data.price?.toLocaleString()} ₫</h2>
             <div style={{ margin: '8px 0' }}>
               <InputNumber value={quantity} min={1} onChange={(value) => setQuantity(value)} />
             </div>
@@ -244,7 +266,9 @@ const ProductDetailPage = () => {
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} md={16}>
           <Card size="small" title="Thông tin sản phẩm" bordered={false}>
-            <div dangerouslySetInnerHTML={{ __html: productDetail.data.content }}></div>
+            <div className="ql-editor" style={{ padding: 0 }}>
+              <div dangerouslySetInnerHTML={{ __html: productDetail.data.content }} />
+            </div>
           </Card>
           <Card size="small" title="Đánh giá" bordered={false} style={{ marginTop: 16 }}>
             {renderReviewForm}

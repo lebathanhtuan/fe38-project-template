@@ -4,11 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { HomeOutlined } from '@ant-design/icons'
 
+import Container from 'components/Container'
 import { ROUTES } from 'constants/routes'
-
 import { updateCartItemRequest, deleteCartItemRequest } from '../../../redux/slicers/cart.slice'
-
-import * as S from './styles'
 
 function CartPage() {
   const dispatch = useDispatch()
@@ -79,7 +77,7 @@ function CartPage() {
   ]
 
   return (
-    <S.CartListWrapper>
+    <Container>
       <Breadcrumb
         items={[
           {
@@ -117,7 +115,7 @@ function CartPage() {
           Tiếp theo
         </Button>
       </Row>
-    </S.CartListWrapper>
+    </Container>
   )
 }
 

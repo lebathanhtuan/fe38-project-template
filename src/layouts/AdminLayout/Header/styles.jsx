@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const HeaderWrapper = styled.div`
-  background-color: #d3d3d3;
+  background-color: darkcyan;
 `
 
 export const HeaderContainer = styled.div`
@@ -10,5 +10,6 @@ export const HeaderContainer = styled.div`
   align-items: center;
   margin: 0 auto;
   width: 100%;
-  padding: 8px 16px;
+  padding: 12px 16px;
+  color: white;
 `

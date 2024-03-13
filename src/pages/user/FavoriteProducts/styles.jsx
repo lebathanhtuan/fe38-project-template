@@ -9,6 +9,7 @@ export const ProductTitle = styled.h3`
   text-overflow: ellipsis;
   height: 48px;
   font-size: 16px;
+  color: rgba(0, 0, 0, 0.88);
 `
 
 export const ProductPrice = styled.p`

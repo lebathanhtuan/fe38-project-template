@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 export const SidebarWrapper = styled.div`
   position: absolute;
-  left: ${(props) => (props.isShowAdminSidebar ? '0px' : '-250px')};
+  left: ${(props) => (props.$isShowAdminSidebar ? '0px' : '-250px')};
   width: 250px;
   height: 100%;
   background-color: #87e8de;
@@ -12,7 +12,7 @@ export const SidebarWrapper = styled.div`
 
 export const SidebarItem = styled(Link)`
   display: block;
-  padding: 8px 12px;
+  padding: 12px 16px;
   text-decoration: none;
   color: black;
   cursor: pointer;
@@ -22,7 +22,7 @@ export const SidebarItem = styled(Link)`
   }
 
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       background-color: #13c2c2;
       color: white;

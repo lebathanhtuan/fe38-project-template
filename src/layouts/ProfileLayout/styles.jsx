@@ -1,17 +1,11 @@
-import styled, { css } from "styled-components";
-import { Card, Avatar } from "antd";
-
-export const ProfileWrapper = styled.div`
-  margin: 0 auto;
-  padding: 16px;
-  max-width: 1232px;
-`;
+import styled, { css } from 'styled-components'
+import { Card, Avatar } from 'antd'
 
 export const ProfileMenuWrapper = styled(Card)`
   & .ant-card-body {
     padding: 0;
   }
-`;
+`
 
 export const AvatarContainer = styled.div`
   display: flex;
@@ -19,12 +13,12 @@ export const AvatarContainer = styled.div`
   justify-content: center;
   align-items: center;
   padding: 16px;
-`;
+`
 
 export const AvatarUpload = styled.div`
   position: relative;
   margin-bottom: 16px;
-`;
+`
 
 export const AvatarEdit = styled.div`
   position: absolute;
@@ -55,7 +49,7 @@ export const AvatarEdit = styled.div`
       border-color: #d6d6d6;
     }
   }
-`;
+`
 
 export const AvatarPreview = styled.img`
   width: 120px;
@@ -66,7 +60,7 @@ export const AvatarPreview = styled.img`
   border-radius: 50%;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   object-fit: cover;
-`;
+`
 
 export const AvatarDefaultWrapper = styled.div`
   display: flex;
@@ -79,7 +73,7 @@ export const AvatarDefaultWrapper = styled.div`
   border: 3px solid #d2d6de;
   border-radius: 50%;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
-`;
+`
 
 export const AvatarDefaultContainer = styled(Avatar)`
   width: 100%;
@@ -88,11 +82,11 @@ export const AvatarDefaultContainer = styled(Avatar)`
   align-items: center;
   justify-content: center;
   background-color: #87d068;
-`;
+`
 
 export const ProfileMenuContainer = styled.div`
   padding-bottom: 24px;
-`;
+`
 
 export const ProfileMenuItem = styled.div`
   display: flex;
@@ -116,4 +110,4 @@ export const ProfileMenuItem = styled.div`
         background-color: #00e6e6;
       }
     `}
-`;
+`

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   theme: 'light',
-  isShowAdminSidebar: false,
+  isShowAdminSidebar: true,
 }
 
 export const commonSlice = createSlice({

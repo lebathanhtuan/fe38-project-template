@@ -21,11 +21,10 @@ import {
 
 function* getProductListSaga(action) {
   try {
-    const { categoryId, typeId, priceOrder, keyword, page, limit, more } = action.payload
+    const { categoryId, priceOrder, keyword, page, limit, more } = action.payload
     const result = yield axios.get('http://localhost:4000/products', {
       params: {
         categoryId: categoryId,
-        typeId: typeId,
         ...(priceOrder && {
           _sort: 'price',
           _order: priceOrder,
@@ -35,7 +34,8 @@ function* getProductListSaga(action) {
         }),
         _page: page,
         _limit: limit,
-        _expand: ['category', 'type'],
+        _expand: ['category'],
+        _embed: ['favorites', 'images'],
         isDelete: false,
       },
     })
@@ -60,8 +60,8 @@ function* getProductDetailSaga(action) {
     const { id } = action.payload
     const result = yield axios.get(`http://localhost:4000/products/${id}`, {
       params: {
-        _expand: ['category', 'type'],
-        _embed: 'favorites',
+        _expand: ['category'],
+        _embed: ['favorites', 'images'],
       },
     })
     yield put(getProductDetailSuccess({ data: result.data }))

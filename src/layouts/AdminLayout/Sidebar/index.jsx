@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { Space } from 'antd'
 
 import { SIDEBAR_ITEMS } from './constants'
 
@@ -12,14 +13,17 @@ function Sidebar() {
 
   const renderSidebarItems = SIDEBAR_ITEMS.map((item, index) => {
     return (
-      <S.SidebarItem key={index} to={item.path} active={pathname === item.path}>
-        {item.name}
+      <S.SidebarItem key={index} to={item.path} $active={pathname === item.path}>
+        <Space>
+          {item.icon}
+          {item.name}
+        </Space>
       </S.SidebarItem>
     )
   })
 
   return (
-    <S.SidebarWrapper isShowAdminSidebar={isShowAdminSidebar}>
+    <S.SidebarWrapper $isShowAdminSidebar={isShowAdminSidebar}>
       {renderSidebarItems}
     </S.SidebarWrapper>
   )
